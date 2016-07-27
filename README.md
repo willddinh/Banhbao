@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Fully CMS
 =============
 
@@ -74,3 +75,7 @@ Please check the system requirements before installing sf CMS.
 ### Licence
 
 [MIT license](http://opensource.org/licenses/MIT)
+=======
+# Banhbao
+Banhbao Project
+>>>>>>> 0349584d09cb83fe039a424cf4559821619172b9
