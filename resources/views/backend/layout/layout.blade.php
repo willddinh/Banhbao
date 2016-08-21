@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="_token" content="{!! csrf_token() !!}" />
-    <title>FullyCMS | Dashboard</title>
+    <title>BanhBaoCMS | Dashboard</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.2 -->
     <link href="{!! url('backend/bootstrap/css/bootstrap.min.css') !!}" rel="stylesheet" type="text/css"/>
@@ -18,7 +18,7 @@
     <!-- Daterange picker -->
     <link href="{!! url('backend/plugins/daterangepicker/daterangepicker-bs3.css') !!}" rel="stylesheet" type="text/css"/>
     <!-- Theme style -->
-    <link href="{!! url('backend/css/AdminLTE.min.css') !!}" rel="stylesheet" type="text/css"/>
+    <link href="{!! url('backend/css/AdminLTE.css') !!}" rel="stylesheet" type="text/css"/>
 
     <link href="{!! url('backend/css/style.css') !!}" rel="stylesheet" type="text/css"/>
     {!! HTML::style("assets/css/github-left.css") !!}
