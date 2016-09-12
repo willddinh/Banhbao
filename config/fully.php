@@ -13,6 +13,7 @@ return [
     | Modules config
     |--------------------------------------------------------------------------
     */
+    'menu_group'    => ["home" => "home", "left" =>"left", "footer" => "footer"],
     'modules'         => [
 
         'photo_gallery' => [

@@ -15,7 +15,7 @@ use Fully\Repositories\PhotoGallery\PhotoGalleryRepository;
 class Menu extends Model
 {
     public $table = 'menus';
-    protected $fillable = ['title', 'url', 'order', 'type', 'selected'];
+    protected $fillable = ['title', 'url', 'order', 'type', 'selected', 'mnugroup'];
 
     public function getMaxOrder()
     {
@@ -192,5 +192,10 @@ class Menu extends Model
     public function getFrontMenuHTML($items)
     {
         return $this->generateFrontMenu($items, 0, true);
+    }
+
+    public function getGroups()
+    {
+        return \Config::get('fully.menu_group');
     }
 }

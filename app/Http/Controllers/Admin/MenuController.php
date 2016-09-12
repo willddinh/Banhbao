@@ -48,8 +48,9 @@ class MenuController extends Controller
     public function create()
     {
         $options = $this->menu->getMenuOptions();
-
-        return view('backend.menu.create', compact('options'));
+        $menuGroup = $this->menu->getGroups();
+        
+        return view('backend.menu.create', compact('options', 'menuGroup'));
     }
 
     /**
@@ -73,6 +74,7 @@ class MenuController extends Controller
         $rules = array(
             'title' => 'required',
             'url' => 'required',
+            'mnugroup' => 'required',
         );
 
         $validation = Validator::make($formData, $rules);
@@ -122,8 +124,9 @@ class MenuController extends Controller
     {
         $options = $this->menu->getMenuOptions();
         $menu = $this->menu->find($id);
-
-        return view('backend.menu.edit', compact('menu', 'options'));
+        $menuGroup = $this->menu->getGroups();
+        
+        return view('backend.menu.edit', compact('menu', 'options', 'menuGroup'));
     }
 
     /**
