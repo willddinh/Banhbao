@@ -9,7 +9,8 @@
 return [
     "category_group" =>["product", "article"],
     "const"=>["CATEGORY_PRODUCT"=>"product",
-              "CATEGORY_ARTICLE"=>"article",],
+              "CATEGORY_ARTICLE"=>"article",
+              "SUBCATEGORY_PRODUCT"=>"subProduct",],
 
 ];
 

@@ -5,6 +5,7 @@ namespace Fully\Models;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Fully\Interfaces\ModelInterface as ModelInterface;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Article.
@@ -14,6 +15,7 @@ use Fully\Interfaces\ModelInterface as ModelInterface;
 class Product extends BaseModel implements ModelInterface, SluggableInterface
 {
     use SluggableTrait;
+    use SoftDeletes;
 
     public $table = 'products';
     protected $fillable = ['title', 'price', 'discount', 'external_url', 'content', 'meta_keywords', 'meta_description', 'is_published'];
@@ -23,6 +25,13 @@ class Product extends BaseModel implements ModelInterface, SluggableInterface
         'build_from' => 'title',
         'save_to' => 'slug',
     );
+
+    protected $dates = ['deleted_at'];
+
+
+    public function entity(){
+        return $this->belongsTo('Fully\Models\Entity');
+    }
 
     public function tags()
     {

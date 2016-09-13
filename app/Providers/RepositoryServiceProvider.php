@@ -2,7 +2,9 @@
 
 namespace Fully\Providers;
 
+use Fully\Models\Entity;
 use Fully\Models\Product;
+use Fully\Models\SubCategory;
 use Fully\Models\TreeCategory;
 use Fully\Repositories\Product\ProductRepository;
 use Fully\Repositories\TreeCategory\TreeCategoryRepository;
@@ -44,6 +46,14 @@ use Fully\Repositories\Slider\SliderRepository;
 use Fully\Repositories\Slider\CacheDecorator as SliderCacheDecorator;
 use Fully\Repositories\Setting\SettingRepository;
 use Fully\Repositories\Setting\CacheDecorator as SettingCacheDecorator;
+
+use Fully\Repositories\Entity\EntityRepository;
+use Fully\Repositories\Entity\CacheDecorator as EntityCacheDecorator;
+
+use Fully\Repositories\SubCategory\SubCategoryRepository;
+use Fully\Repositories\SubCategory\CacheDecorator as SubCategoryCacheDecorator;
+
+
 use Fully\Services\Cache\FullyCache;
 
 /**
@@ -61,6 +71,26 @@ class RepositoryServiceProvider extends ServiceProvider
         $app = $this->app;
 
         //dd($app['config']->get('fully.cache'));
+
+
+        // entity
+        $app->bind('Fully\Repositories\Entity\EntityInterface', function ($app) {
+
+            $entity = new EntityRepository(
+                new Entity()
+            );
+
+            //dd($app['config']->get('is_admin', false));
+
+            if ($app['config']->get('fully.cache') === true && $app['config']->get('is_admin', false) == false) {
+                $article = new EntityCacheDecorator(
+                    $entity,
+                    new FullyCache($app['cache'], 'entities')
+                );
+            }
+
+            return $entity;
+        });
 
         // article
         $app->bind('Fully\Repositories\Article\ArticleInterface', function ($app) {
@@ -115,6 +145,23 @@ class RepositoryServiceProvider extends ServiceProvider
             }
 
             return $category;
+        });
+
+        // sub-category
+        $app->bind('Fully\Repositories\SubCategory\SubCategoryInterface', function ($app) {
+
+            $subCategory = new SubCategoryRepository(
+                new SubCategory()
+            );
+
+            if ($app['config']->get('fully.cache') === true && $app['config']->get('is_admin', false) == false) {
+                $subCategory = new SubCategoryCacheDecorator(
+                    $subCategory ,
+                    new FullyCache($app['cache'], 'subCategories')
+                );
+            }
+
+            return $subCategory ;
         });
 
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Fully\Repositories\Product;
+namespace Fully\Repositories\Entity;
 
-use Fully\Models\Product;
+use Fully\Models\Entity;
 use Config;
 use Response;
 use Fully\Models\Tag;
@@ -15,12 +15,8 @@ use Fully\Repositories\RepositoryAbstract;
 use Fully\Repositories\CrudableInterface as CrudableInterface;
 use Fully\Exceptions\Validation\ValidationException;
 
-/**
- * Class ProductRepository.
- *
- * @author Sefa Karagöz <karagozsefa@gmail.com>
- */
-class ProductRepository extends RepositoryAbstract implements ProductInterface, CrudableInterface
+
+class EntityRepository extends RepositoryAbstract implements EntityInterface, CrudableInterface
 {
     protected $width;
     protected $height;
@@ -28,7 +24,7 @@ class ProductRepository extends RepositoryAbstract implements ProductInterface, 
     protected $thumbHeight;
     protected $imgDir;
     protected $perPage;
-    protected $product;
+    protected $entity;
     /**
      * Rules.
      *
@@ -36,24 +32,23 @@ class ProductRepository extends RepositoryAbstract implements ProductInterface, 
      */
     protected static $rules = [
         'title' => 'required',
-        'content' => 'required',
         'price' => 'required',
         
     ];
 
     /**
-     * @param Product $Product
+     * @param Entity $Entity
      */
-    public function __construct(Product $product)
+    public function __construct(Entity $entity)
     {
         $config = Config::get('fully');
         $this->perPage = $config['per_page'];
-        $this->width = $config['modules']['product']['image_size']['width'];
-        $this->height = $config['modules']['product']['image_size']['height'];
-        $this->thumbWidth = $config['modules']['product']['thumb_size']['width'];
-        $this->thumbHeight = $config['modules']['product']['thumb_size']['height'];
-        $this->imgDir = $config['modules']['product']['image_dir'];
-        $this->product = $product;
+        $this->width = $config['modules']['entity']['image_size']['width'];
+        $this->height = $config['modules']['entity']['image_size']['height'];
+        $this->thumbWidth = $config['modules']['entity']['thumb_size']['width'];
+        $this->thumbHeight = $config['modules']['entity']['thumb_size']['height'];
+        $this->imgDir = $config['modules']['entity']['image_dir'];
+        $this->entity = $entity;
     }
 
     /**
@@ -61,7 +56,7 @@ class ProductRepository extends RepositoryAbstract implements ProductInterface, 
      */
     public function all()
     {
-        return $this->product->with('tags')->orderBy('created_at', 'DESC')->where('is_published', 1)->where('lang', $this->getLang())->get();
+        return $this->entity->with('tags')->orderBy('id', 'DESC')->where('lang', $this->getLang())->get();
     }
 
     /**
@@ -69,9 +64,9 @@ class ProductRepository extends RepositoryAbstract implements ProductInterface, 
      *
      * @return mixed
      */
-    public function getLastProduct($limit)
+    public function getLastEntity($limit)
     {
-        return $this->product->orderBy('created_at', 'desc')->where('lang', $this->getLang())->take($limit)->offset(0)->get();
+        return $this->entity->orderBy('id', 'desc')->where('lang', $this->getLang())->take($limit)->offset(0)->get();
     }
 
     /**
@@ -79,26 +74,26 @@ class ProductRepository extends RepositoryAbstract implements ProductInterface, 
      */
     public function lists()
     {
-        return $this->product->get()->where('lang', $this->getLang())->lists('title', 'id');
+        return $this->entity->get()->where('lang', $this->getLang())->lists('title', 'id');
     }
 
     /*
     public function paginate($perPage = null, $all = false) {
 
         if ($all)
-            return $this->Product->with('tags')->orderBy('created_at', 'DESC')
+            return $this->Entity->with('tags')->orderBy('created_at', 'DESC')
                 ->paginate(($perPage) ? $perPage : $this->perPage);
 
-        return $this->Product->with('tags')->orderBy('created_at', 'DESC')
+        return $this->Entity->with('tags')->orderBy('created_at', 'DESC')
             ->where('is_published', 1)
             ->paginate(($perPage) ? $perPage : $this->perPage);
     }
     */
 
     /**
-     * Get paginated Products.
+     * Get paginated Entitys.
      *
-     * @param int  $page  Number of Products per page
+     * @param int  $page  Number of Entitys per page
      * @param int  $limit Results per page
      * @param bool $all   Show published or all
      *
@@ -112,16 +107,12 @@ class ProductRepository extends RepositoryAbstract implements ProductInterface, 
         $result->totalItems = 0;
         $result->items = array();
 
-        $query = $this->product->with('tags')->orderBy('created_at', 'DESC')->where('lang', $this->getLang());
+        $query = $this->entity->with('tags')->orderBy('id', 'DESC')->where('lang', $this->getLang());
 
-        if (!$all) {
-            $query->where('is_published', 1);
-        }
+        $entitys = $query->skip($limit * ($page - 1))->take($limit)->get();
 
-        $products = $query->skip($limit * ($page - 1))->take($limit)->get();
-
-        $result->totalItems = $this->totalProducts($all);
-        $result->items = $products->all();
+        $result->totalItems = $this->totalEntitys($all);
+        $result->items = $entitys->all();
 
         return $result;
     }
@@ -133,7 +124,7 @@ class ProductRepository extends RepositoryAbstract implements ProductInterface, 
      */
     public function find($id)
     {
-        return $this->product->with(['tags', 'category'])->findOrFail($id);
+        return $this->entity->with(['tags', 'subCategories'])->findOrFail($id);
     }
 
     /**
@@ -143,11 +134,7 @@ class ProductRepository extends RepositoryAbstract implements ProductInterface, 
      */
     public function getBySlug($slug)
     {
-        return $this->product->with(['tags', 'category'])->where('slug', $slug)->first();
-    }
-
-    public function createEntity($attributes){
-        
+        return $this->entity->with(['tags', 'subCategories'])->where('slug', $slug)->first();
     }
 
     /**
@@ -186,48 +173,48 @@ class ProductRepository extends RepositoryAbstract implements ProductInterface, 
                     // thumb
                     Image::make($destinationPath.$fileName)->resize($this->thumbWidth, $this->thumbHeight)->save($destinationPath.'thumb_'.$fileName);
 
-                    $this->product->lang = $this->getLang();
-                    $this->product->file_name = $fileName;
-                    $this->product->file_size = $fileSize;
-                    $this->product->path = $this->imgDir.'/'.$fileName;
+                    $this->entity->lang = $this->getLang();
+                    $this->entity->file_name = $fileName;
+                    $this->entity->file_size = $fileSize;
+                    $this->entity->path = $this->imgDir.'/'.$fileName;
                 }
             }
 
             //--------------------------------------------------------
 
-            $this->product->lang = $this->getLang();
-            if ($this->product->fill($attributes)->save()) {
+            $this->entity->lang = $this->getLang();
+            if ($this->entity->fill($attributes)->save()) {
                 $category = Category::find($attributes['category']);
-                $category->products()->save($this->product);
+                $category->entitys()->save($this->entity);
             }
 
-            $productTags = explode(',', $attributes['tag']);
+            $entityTags = explode(',', $attributes['tag']);
 
-            foreach ($productTags as $productTag) {
-                if (!$productTag) {
+            foreach ($entityTags as $entityTag) {
+                if (!$entityTag) {
                     continue;
                 }
 
-                $tag = Tag::where('name', '=', $productTag)->first();
+                $tag = Tag::where('name', '=', $entityTag)->first();
 
                 if (!$tag) {
                     $tag = new Tag();
                 }
 
                 $tag->lang = $this->getLang();
-                $tag->name = $productTag;
-                //$tag->slug = Str::slug($ProductTag);
+                $tag->name = $entityTag;
+                //$tag->slug = Str::slug($EntityTag);
 
-                $this->product->tags()->save($tag);
+                $this->entity->tags()->save($tag);
             }
 
-            //Event::fire('Product.created', $this->Product);
-            Event::fire('product.creating', $this->product);
+            //Event::fire('Entity.created', $this->Entity);
+            Event::fire('entity.creating', $this->entity);
 
             return true;
         }
 
-        throw new ValidationException('Product validation failed', $this->getErrors());
+        throw new ValidationException('Entity validation failed', $this->getErrors());
     }
 
     /**
@@ -240,7 +227,7 @@ class ProductRepository extends RepositoryAbstract implements ProductInterface, 
      */
     public function update($id, $attributes)
     {
-        $this->product = $this->find($id);
+        $this->entity = $this->find($id);
         $attributes['is_published'] = isset($attributes['is_published']) ? true : false;
 
         if ($this->isValid($attributes)) {
@@ -251,8 +238,8 @@ class ProductRepository extends RepositoryAbstract implements ProductInterface, 
 
                 // delete old image
                 $destinationPath = public_path().$this->imgDir;
-                File::delete($destinationPath.$this->product->file_name);
-                File::delete($destinationPath.'thumb_'.$this->product->file_name);
+                File::delete($destinationPath.$this->entity->file_name);
+                File::delete($destinationPath.'thumb_'.$this->entity->file_name);
 
                 $destinationPath = public_path().$this->imgDir;
                 $fileName = $file->getClientOriginalName();
@@ -268,33 +255,33 @@ class ProductRepository extends RepositoryAbstract implements ProductInterface, 
                     // thumb
                     Image::make($destinationPath.$fileName)->resize($this->thumbWidth, $this->thumbHeight)->save($destinationPath.'thumb_'.$fileName);
 
-                    $this->product->file_name = $fileName;
-                    $this->product->file_size = $fileSize;
-                    $this->product->path = $this->imgDir.'/'.$fileName;
+                    $this->entity->file_name = $fileName;
+                    $this->entity->file_size = $fileSize;
+                    $this->entity->path = $this->imgDir.'/'.$fileName;
                 }
             }
             //-------------------------------------------------------
 
-            if ($this->product->fill($attributes)->save()) {
-                $this->product->resluggify();
+            if ($this->entity->fill($attributes)->save()) {
+                $this->entity->resluggify();
                 $category = Category::find($attributes['category']);
-                $category->products()->save($this->product);
+                $category->entitys()->save($this->entity);
             }
 
-            $productTags = explode(',', $attributes['tag']);
+            $entityTags = explode(',', $attributes['tag']);
 
-            foreach ($productTags as $productTag) {
-                if (!$productTag) {
+            foreach ($entityTags as $entityTag) {
+                if (!$entityTag) {
                     continue;
                 }
 
-                $tag = Tag::where('name', '=', $productTag)->where('lang', $this->getLang()) ->first();
+                $tag = Tag::where('name', '=', $entityTag)->where('lang', $this->getLang()) ->first();
 
                 if (!$tag) {
                     $tag = new Tag();
                     $tag->lang = $this->getLang();
-                    $tag->name = $productTag;
-                    $this->product->tags()->save($tag);
+                    $tag->name = $entityTag;
+                    $this->entity->tags()->save($tag);
                 }
 
 
@@ -303,7 +290,7 @@ class ProductRepository extends RepositoryAbstract implements ProductInterface, 
             return true;
         }
 
-        throw new ValidationException('Product validation failed', $this->getErrors());
+        throw new ValidationException('Entity validation failed', $this->getErrors());
     }
 
     /**
@@ -313,9 +300,9 @@ class ProductRepository extends RepositoryAbstract implements ProductInterface, 
      */
     public function delete($id)
     {
-        $product = $this->product->findOrFail($id);
-        $product->tags()->detach();
-        $product->delete();
+        $entity = $this->entity->findOrFail($id);
+        $entity->tags()->detach();
+        $entity->delete();
     }
 
     /**
@@ -325,12 +312,12 @@ class ProductRepository extends RepositoryAbstract implements ProductInterface, 
      */
     public function togglePublish($id)
     {
-        $product = $this->product->find($id);
+        $entity = $this->entity->find($id);
 
-        $product->is_published = ($product->is_published) ? false : true;
-        $product->save();
+        $entity->is_published = ($entity->is_published) ? false : true;
+        $entity->save();
 
-        return Response::json(array('result' => 'success', 'changed' => ($product->is_published) ? 1 : 0));
+        return Response::json(array('result' => 'success', 'changed' => ($entity->is_published) ? 1 : 0));
     }
 
     /**
@@ -340,24 +327,24 @@ class ProductRepository extends RepositoryAbstract implements ProductInterface, 
      */
     public function getUrl($id)
     {
-        $product = $this->product->findOrFail($id);
+        $entity = $this->entity->findOrFail($id);
 
-        return url('product/'.$id.'/'.$product->slug, $parameters = array(), $secure = null);
+        return url('entity/'.$id.'/'.$entity->slug, $parameters = array(), $secure = null);
     }
 
     /**
-     * Get total Product count.
+     * Get total Entity count.
      *
      * @param bool $all
      *
      * @return mixed
      */
-    protected function totalProducts($all = false)
+    protected function totalEntitys($all = false)
     {
         if (!$all) {
-            return $this->product->where('is_published', 1)->where('lang', $this->getLang())->count();
+            return $this->entity->where('is_published', 1)->where('lang', $this->getLang())->count();
         }
 
-        return $this->product->where('lang', $this->getLang())->count();
+        return $this->entity->where('lang', $this->getLang())->count();
     }
 }

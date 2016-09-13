@@ -2,6 +2,8 @@
 
 namespace Fully\Http\Controllers\Admin;
 
+use Fully\Models\SubCategory;
+use Fully\Repositories\SubCategory\SubCategoryInterface;
 use View;
 use Flash;
 use Input;
@@ -23,13 +25,16 @@ class ProductController extends Controller
 {
     protected $product;
     protected $category;
+    protected $subCategory;
     protected $perPage;
 
-    public function __construct(ProductInterface $product, CategoryInterface $category)
+    public function __construct(ProductInterface $product, CategoryInterface $category, 
+                                SubCategoryInterface $subCategory)
     {
         View::share('active', 'product');
         $this->product = $product;
         $this->category = $category;
+        $this->subCategory = $subCategory;
 
         $this->perPage = config('fully.modules.product.per_page');
     }
@@ -55,8 +60,9 @@ class ProductController extends Controller
     public function create()
     {
         $categories = $this->category->findByGroupForDropDown(config("common.const.CATEGORY_PRODUCT"));
+        $subCategories = $this->subCategory->findByGroupForDropDown(config("common.const.SUBCATEGORY_PRODUCT"));
 
-        return view('backend.product.create', compact('categories'));
+        return view('backend.product.create', compact('categories', 'subCategories'));
     }
 
     /**
