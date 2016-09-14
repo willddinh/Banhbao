@@ -115,7 +115,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $app->bind('Fully\Repositories\Product\ProductInterface', function ($app) {
 
             $product = new ProductRepository(
-                new Product()
+                new Product(), new Entity()
             );
 
             //dd($app['config']->get('is_admin', false));

@@ -60,7 +60,8 @@ class ProductController extends Controller
     public function create()
     {
         $categories = $this->category->findByGroupForDropDown(config("common.const.CATEGORY_PRODUCT"));
-        $subCategories = $this->subCategory->findByGroupForDropDown(config("common.const.SUBCATEGORY_PRODUCT"));
+        $subCategories = addDefaultOptionToSelectData(
+            $this->subCategory->findByGroupForDropDown(config("common.const.SUBCATEGORY_PRODUCT")));
 
         return view('backend.product.create', compact('categories', 'subCategories'));
     }

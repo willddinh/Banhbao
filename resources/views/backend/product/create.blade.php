@@ -23,7 +23,8 @@
     <br>
     <br>
     <div class="container">
-
+        <div class="row">
+            <div class="col-sm-10">
     {!! Form::open(array('action' => '\Fully\Http\Controllers\Admin\ProductController@store', 'files'=>true)) !!}
 
     <!-- Title -->
@@ -104,13 +105,13 @@
 
 
         <!--Sub Category -->
-        <div class="control-group {!! $errors->has('category') ? 'error' : '' !!}">
+        <div class="control-group {!! $errors->has('subCategories') ? 'error' : '' !!}">
             <label class="control-label" for="title">Sub Category</label>
 
             <div class="controls">
-                {!! Form::select('category', $categories, null, array('class' => 'form-control', 'value'=>Input::old('category'))) !!}
-                @if ($errors->first('category'))
-                    <span class="help-block">{!! $errors->first('category') !!}</span>
+                {!! Form::select('subCategories', $subCategories, null, array('multiple'=>'multiple','class' => 'form-control', 'value'=>Input::old('subCategories'))) !!}
+                @if ($errors->first('subCategories'))
+                    <span class="help-block">{!! $errors->first('subCategories') !!}</span>
                 @endif
             </div>
         </div>
@@ -210,5 +211,7 @@
                 }
             });
         </script>
+            </div>
+        </div>
     </div>
 @stop

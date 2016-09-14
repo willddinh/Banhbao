@@ -79,3 +79,7 @@ function langRedirectRoute($route, $parameters = array())
 {
     return Redirect::route(getLang().'.'.$route, $parameters);
 }
+
+function addDefaultOptionToSelectData($dataArray){
+    return array_merge(array("-1"=>"Choose one"), $dataArray);
+}

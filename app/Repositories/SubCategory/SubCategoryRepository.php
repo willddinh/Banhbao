@@ -89,7 +89,7 @@ class SubCategoryRepository extends RepositoryAbstract implements SubCategoryInt
     }
 
     public function findByGroupForDropDown($group){
-        return $this->subCategory->where('lang', $this->getLang())->where('group', $group)->lists('title', 'id');
+        return $this->subCategory->query()->where('lang', $this->getLang())->where('group', $group)->lists('title', 'id')->all();
     }
 
     /**

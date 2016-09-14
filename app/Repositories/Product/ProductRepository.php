@@ -2,8 +2,10 @@
 
 namespace Fully\Repositories\Product;
 
+use Fully\Models\Entity;
 use Fully\Models\Product;
 use Config;
+use Fully\Models\SubCategory;
 use Response;
 use Fully\Models\Tag;
 use Fully\Models\Category;
@@ -28,7 +30,14 @@ class ProductRepository extends RepositoryAbstract implements ProductInterface, 
     protected $thumbHeight;
     protected $imgDir;
     protected $perPage;
+    /**
+     * @var \Fully\Models\Product
+     */
     protected $product;
+    /**
+     * @var \Fully\Models\Entity
+     */
+    protected $entity;
     /**
      * Rules.
      *
@@ -44,7 +53,7 @@ class ProductRepository extends RepositoryAbstract implements ProductInterface, 
     /**
      * @param Product $Product
      */
-    public function __construct(Product $product)
+    public function __construct(Product $product, Entity $entity)
     {
         $config = Config::get('fully');
         $this->perPage = $config['per_page'];
@@ -54,6 +63,7 @@ class ProductRepository extends RepositoryAbstract implements ProductInterface, 
         $this->thumbHeight = $config['modules']['product']['thumb_size']['height'];
         $this->imgDir = $config['modules']['product']['image_dir'];
         $this->product = $product;
+        $this->entity = $entity;
     }
 
     /**
@@ -147,7 +157,46 @@ class ProductRepository extends RepositoryAbstract implements ProductInterface, 
     }
 
     public function createEntity($attributes){
-        
+        $this->entity->lang = $this->getLang();
+
+        $this->entity->fill(['title'=>$attributes['title']], ['price'=>$attributes['price']])->save();
+//save tags
+        $tags = explode(',', $attributes['tag']);
+
+        foreach ($tags as $tag) {
+            if (!$tag) {
+                continue;
+            }
+
+            $tag = Tag::where('name', '=', $tag)->first();
+
+            if (!$tag) {
+                $tag = new Tag();
+            }
+
+            $tag->lang = $this->getLang();
+            $tag->name = $tag;
+            //$tag->slug = Str::slug($ProductTag);
+
+            $this->entity->tags()->save($tag);
+        }
+
+//save subcategories
+        $subCategories = explode(',', $attributes['subCategories']);
+
+        foreach ($subCategories as $subCatId) {
+            if (!$subCatId || $subCatId == -1) {
+                continue;
+            }
+
+            $subCat = SubCategory::query()->find($subCatId);
+
+            if ($subCat) {
+                $this->entity->subCategories()->save($subCat);
+            }
+        }
+
+
     }
 
     /**
@@ -195,9 +244,11 @@ class ProductRepository extends RepositoryAbstract implements ProductInterface, 
 
             //--------------------------------------------------------
 
+            $this->createEntity($attributes);
+            $this->product->entity()->associate($this->entity);
             $this->product->lang = $this->getLang();
             if ($this->product->fill($attributes)->save()) {
-                $category = Category::find($attributes['category']);
+                $category = Category::query()->find($attributes['category']);
                 $category->products()->save($this->product);
             }
 

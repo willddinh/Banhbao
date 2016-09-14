@@ -80,14 +80,14 @@ CREATE TABLE IF NOT EXISTS `entity` (
   `currency_unit` varchar(20) DEFAULT NULL,
   `lang` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 -- Dumping structure for table banhbao.entity_categories
 CREATE TABLE IF NOT EXISTS `entity_categories` (
   `id` int(11) NOT NULL,
   `entity_id` int(11) DEFAULT NULL,
-  `sub_cat_id` int(11) DEFAULT NULL,
+  `sub_category_id` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
@@ -223,7 +223,7 @@ CREATE TABLE IF NOT EXISTS `persistences` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `persistences_code_unique` (`code`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Data exporting was unselected.
 -- Dumping structure for table banhbao.photos
@@ -275,7 +275,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   `entity_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Data exporting was unselected.
 -- Dumping structure for table banhbao.products_tags
@@ -372,12 +372,12 @@ CREATE TABLE IF NOT EXISTS `sliders` (
 -- Data exporting was unselected.
 -- Dumping structure for table banhbao.sub_categories
 CREATE TABLE IF NOT EXISTS `sub_categories` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) DEFAULT NULL,
   `lang` varchar(5) DEFAULT NULL,
   `group` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 -- Dumping structure for table banhbao.tags
