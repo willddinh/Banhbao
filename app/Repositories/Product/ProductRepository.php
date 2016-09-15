@@ -47,7 +47,7 @@ class ProductRepository extends RepositoryAbstract implements ProductInterface, 
         'title' => 'required',
         'content' => 'required',
         'price' => 'required',
-        
+
     ];
 
     /**
@@ -122,7 +122,7 @@ class ProductRepository extends RepositoryAbstract implements ProductInterface, 
         $result->totalItems = 0;
         $result->items = array();
 
-        $query = $this->product->with('tags')->orderBy('created_at', 'DESC')->where('lang', $this->getLang());
+        $query = $this->product->with('entity')->orderBy('id', 'DESC')->where('lang', $this->getLang());
 
         if (!$all) {
             $query->where('is_published', 1);
@@ -143,7 +143,7 @@ class ProductRepository extends RepositoryAbstract implements ProductInterface, 
      */
     public function find($id)
     {
-        return $this->product->with(['tags', 'category'])->findOrFail($id);
+        return $this->product->with(['entity', 'category'])->findOrFail($id);
     }
 
     /**
@@ -153,36 +153,37 @@ class ProductRepository extends RepositoryAbstract implements ProductInterface, 
      */
     public function getBySlug($slug)
     {
-        return $this->product->with(['tags', 'category'])->where('slug', $slug)->first();
+        return $this->product->with(['entity', 'category'])->where('slug', $slug)->first();
     }
 
     public function createEntity($attributes){
         $this->entity->lang = $this->getLang();
 
-        $this->entity->fill(['title'=>$attributes['title']], ['price'=>$attributes['price']])->save();
+        $this->entity->fill(['title'=>$attributes['title'], 'price'=>$attributes['price']])->save();
 //save tags
         $tags = explode(',', $attributes['tag']);
 
-        foreach ($tags as $tag) {
-            if (!$tag) {
+        foreach ($tags as $tagName) {
+            if (!$tagName) {
                 continue;
             }
 
-            $tag = Tag::where('name', '=', $tag)->first();
+            $tag = Tag::query()->where('name', '=', $tagName)->where('lang', $this->getLang()) ->first();
 
             if (!$tag) {
                 $tag = new Tag();
             }
 
             $tag->lang = $this->getLang();
-            $tag->name = $tag;
-            //$tag->slug = Str::slug($ProductTag);
-
+            $tag->name = $tagName;
             $this->entity->tags()->save($tag);
         }
 
 //save subcategories
-        $subCategories = explode(',', $attributes['subCategories']);
+
+        if(!array_key_exists('subCategories', $attributes))
+            return;
+        $subCategories = $attributes['subCategories'];
 
         foreach ($subCategories as $subCatId) {
             if (!$subCatId || $subCatId == -1) {
@@ -197,6 +198,53 @@ class ProductRepository extends RepositoryAbstract implements ProductInterface, 
         }
 
 
+    }
+
+    private function updateEntity($attributes)
+    {
+        $this->entity->lang = $this->getLang();
+
+        $this->entity->fill(['title'=>$attributes['title'], 'price'=>$attributes['price']])->save();
+//save tags
+
+
+        $tags = explode(',', $attributes['tag']);
+        $this->entity->tags()->detach();
+        foreach ($tags as $tagName) {
+            if (!$tagName) {
+                continue;
+            }
+
+            $tag = Tag::query()->where('name', '=', $tagName)->where('lang', $this->getLang()) ->first();
+
+            if (!$tag) {
+                $tag = new Tag();
+            }
+
+            $tag->lang = $this->getLang();
+            $tag->name = $tagName;
+            
+
+            $this->entity->tags()->save($tag);
+        }
+
+//save subcategories
+        $this->entity->subCategories()->detach();
+        if(!array_key_exists('subCategories', $attributes))
+            return;
+        $subCategories = $attributes['subCategories'];
+
+        foreach ($subCategories as $subCatId) {
+            if (!$subCatId || $subCatId == -1) {
+                continue;
+            }
+
+            $subCat = SubCategory::query()->find($subCatId);
+
+            if ($subCat) {
+                $this->entity->subCategories()->save($subCat);
+            }
+        }
     }
 
     /**
@@ -252,26 +300,6 @@ class ProductRepository extends RepositoryAbstract implements ProductInterface, 
                 $category->products()->save($this->product);
             }
 
-            $productTags = explode(',', $attributes['tag']);
-
-            foreach ($productTags as $productTag) {
-                if (!$productTag) {
-                    continue;
-                }
-
-                $tag = Tag::where('name', '=', $productTag)->first();
-
-                if (!$tag) {
-                    $tag = new Tag();
-                }
-
-                $tag->lang = $this->getLang();
-                $tag->name = $productTag;
-                //$tag->slug = Str::slug($ProductTag);
-
-                $this->product->tags()->save($tag);
-            }
-
             //Event::fire('Product.created', $this->Product);
             Event::fire('product.creating', $this->product);
 
@@ -292,6 +320,7 @@ class ProductRepository extends RepositoryAbstract implements ProductInterface, 
     public function update($id, $attributes)
     {
         $this->product = $this->find($id);
+        $this->entity = $this->product->entity;
         $attributes['is_published'] = isset($attributes['is_published']) ? true : false;
 
         if ($this->isValid($attributes)) {
@@ -325,6 +354,8 @@ class ProductRepository extends RepositoryAbstract implements ProductInterface, 
                 }
             }
             //-------------------------------------------------------
+            $this->updateEntity($attributes);
+//            $this->product->entity()->associate($this->entity);
 
             if ($this->product->fill($attributes)->save()) {
                 $this->product->resluggify();
@@ -332,7 +363,7 @@ class ProductRepository extends RepositoryAbstract implements ProductInterface, 
                 $category->products()->save($this->product);
             }
 
-            $productTags = explode(',', $attributes['tag']);
+           /* $productTags = explode(',', $attributes['tag']);
 
             foreach ($productTags as $productTag) {
                 if (!$productTag) {
@@ -349,7 +380,7 @@ class ProductRepository extends RepositoryAbstract implements ProductInterface, 
                 }
 
 
-            }
+            }*/
 
             return true;
         }
@@ -411,4 +442,6 @@ class ProductRepository extends RepositoryAbstract implements ProductInterface, 
 
         return $this->product->where('lang', $this->getLang())->count();
     }
+
+
 }

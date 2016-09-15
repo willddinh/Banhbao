@@ -26,7 +26,7 @@
             <tbody>
             <tr>
                 <td><strong>Title</strong></td>
-                <td>{!! $product->title !!}</td>
+                <td>{!! $product->entity->title !!}</td>
             </tr>
             <tr>
                 <td><strong>Slug</strong></td>
@@ -35,6 +35,15 @@
             <tr>
                 <td><strong>Category</strong></td>
                 <td>{!! $product->category[0]->title !!}</td>
+            </tr>
+
+            <tr>
+                <td><strong>Sub Category</strong></td>
+                <td>
+                    @foreach($product->entity->subCategories as $subCat)
+                        {!! $subCat->title !!},
+                    @endforeach
+                </td>
             </tr>
             <tr>
                 <td><strong>Date Created</strong></td>
@@ -59,7 +68,7 @@
             <tr>
                 <td><strong>Tag</strong></td>
                 <td>
-                    @foreach($product->tags as $tag)
+                    @foreach($product->entity->tags as $tag)
                         {!! $tag->name !!},
                     @endforeach
                 </td>

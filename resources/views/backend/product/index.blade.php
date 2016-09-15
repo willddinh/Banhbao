@@ -70,9 +70,9 @@
                             <tr>
                                 <td>
                                     <a href="{!! langRoute('admin.product.show', array($product->id)) !!}" class="btn btn-link btn-xs">
-                                        {!! $product->title !!} </a>
+                                        {!! $product->entity->title !!} </a>
                                 </td>
-                                <td>{!! $product->price !!}</td>
+                                <td>{!! $product->entity->price !!}</td>
                                 <td>{!! $product->discount !!}</td>
                                 <td>{!! $product->created_at !!}</td>
                                 <td>{!! $product->updated_at !!}</td>

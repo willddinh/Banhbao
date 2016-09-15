@@ -81,5 +81,5 @@ function langRedirectRoute($route, $parameters = array())
 }
 
 function addDefaultOptionToSelectData($dataArray){
-    return array_merge(array("-1"=>"Choose one"), $dataArray);
+    return array("-1"=>"Choose one") + $dataArray;
 }

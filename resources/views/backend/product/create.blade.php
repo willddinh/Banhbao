@@ -109,7 +109,7 @@
             <label class="control-label" for="title">Sub Category</label>
 
             <div class="controls">
-                {!! Form::select('subCategories', $subCategories, null, array('multiple'=>'multiple','class' => 'form-control', 'value'=>Input::old('subCategories'))) !!}
+                {!! Form::select('subCategories[]', $subCategories, null, array('multiple'=>'true','class' => 'form-control', 'value'=>Input::old('subCategories'))) !!}
                 @if ($errors->first('subCategories'))
                     <span class="help-block">{!! $errors->first('subCategories') !!}</span>
                 @endif
