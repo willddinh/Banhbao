@@ -27,6 +27,7 @@
                 <td><strong>Name</strong></td>
                 <td>{!! $publisher->name !!}</td>
             </tr>
+            
             </tbody>
         </table>
     </div>

@@ -69,6 +69,23 @@ return [
             'per_page' => 20,
         ],
 
+
+        'book' => [
+
+            'image_size' => [
+                'width'  => 730,
+                'height' => 290
+            ],
+            'thumb_size' => [
+                'width'  => 64,
+                'height' => 64
+            ],
+
+            'image_dir' => '/uploads/book/',
+
+            'per_page' => 20,
+        ],
+
         'news' => [
 
             'image_size' => [

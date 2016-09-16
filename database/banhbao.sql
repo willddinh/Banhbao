@@ -57,6 +57,85 @@ CREATE TABLE IF NOT EXISTS `articles_tags` (
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Data exporting was unselected.
+-- Dumping structure for table banhbao.authors
+CREATE TABLE IF NOT EXISTS `authors` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  `slug` varchar(100) DEFAULT NULL,
+  `lang` varchar(5) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Data exporting was unselected.
+-- Dumping structure for table banhbao.books
+CREATE TABLE IF NOT EXISTS `books` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `entity_id` int(11) DEFAULT NULL,
+  `content` text COLLATE utf8_unicode_ci NOT NULL,
+  `isbn` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `external_url` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `discount` int(3) DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `rent_price` decimal(10,2) DEFAULT NULL,
+  `category_id` int(11) NOT NULL,
+  `meta_keywords` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `meta_description` text COLLATE utf8_unicode_ci,
+  `path` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `file_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `file_size` int(11) DEFAULT NULL,
+  `language` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `size` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `page_num` int(5) DEFAULT NULL,
+  `author_id` int(10) DEFAULT NULL,
+  `publisher_id` int(10) DEFAULT NULL,
+  `publish_date` date DEFAULT NULL,
+  `is_published` tinyint(1) NOT NULL DEFAULT '1',
+  `lang` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- Data exporting was unselected.
+-- Dumping structure for table banhbao.books_authors
+CREATE TABLE IF NOT EXISTS `books_authors` (
+  `id` int(11) NOT NULL,
+  `book_id` int(11) DEFAULT NULL,
+  `author_id` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Data exporting was unselected.
+-- Dumping structure for table banhbao.books_publishers
+CREATE TABLE IF NOT EXISTS `books_publishers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `book_id` int(11) DEFAULT NULL,
+  `publisher_id` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Data exporting was unselected.
+-- Dumping structure for table banhbao.book_rates
+CREATE TABLE IF NOT EXISTS `book_rates` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `book_id` int(11) DEFAULT NULL,
+  `comment` varchar(255) DEFAULT NULL,
+  `star` int(1) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Data exporting was unselected.
 -- Dumping structure for table banhbao.categories
 CREATE TABLE IF NOT EXISTS `categories` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -223,7 +302,7 @@ CREATE TABLE IF NOT EXISTS `persistences` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `persistences_code_unique` (`code`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Data exporting was unselected.
 -- Dumping structure for table banhbao.photos
@@ -303,6 +382,20 @@ CREATE TABLE IF NOT EXISTS `projects` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- Data exporting was unselected.
+-- Dumping structure for table banhbao.publishers
+CREATE TABLE IF NOT EXISTS `publishers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `slug` varchar(255) DEFAULT NULL,
+  `lang` varchar(50) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 -- Dumping structure for table banhbao.reminders

@@ -117,6 +117,28 @@
                     </li>
                 </ul>
             </li>
+
+            <li class="treeview {{ setActive('admin/publisher*') }}"><a href="#"> <i class="fa fa-question"></i> <span>Publisher</span>
+                    <i class="fa fa-angle-left pull-right"></i> </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ url(getLang() . '/admin/publisher') }}"><i class="fa fa-question-circle"></i> All publisher</a></li>
+                    <li>
+                        <a href="{{ url(getLang() . '/admin/publisher/create') }}"><i class="fa fa-plus-square"></i> Add publisher</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="treeview {{ setActive('admin/author*') }}"><a href="#"> <i class="fa fa-question"></i> <span>Author</span>
+                    <i class="fa fa-angle-left pull-right"></i> </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ url(getLang() . '/admin/author') }}"><i class="fa fa-question-circle"></i> All author</a></li>
+                    <li>
+                        <a href="{{ url(getLang() . '/admin/author/create') }}"><i class="fa fa-plus-square"></i> Add author</a>
+                    </li>
+                </ul>
+            </li>
+
+
             <li class="treeview {{ setActive(['admin/user*', 'admin/group*']) }}"><a href="#"> <i class="fa fa-user"></i> <span>Users</span>
                     <i class="fa fa-angle-left pull-right"></i> </a>
                 <ul class="treeview-menu">

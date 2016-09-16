@@ -2,8 +2,11 @@
 
 namespace Fully\Providers;
 
+use Fully\Models\Author;
+use Fully\Models\Book;
 use Fully\Models\Entity;
 use Fully\Models\Product;
+use Fully\Models\Publisher;
 use Fully\Models\SubCategory;
 use Fully\Models\TreeCategory;
 use Fully\Repositories\Product\ProductRepository;
@@ -52,6 +55,20 @@ use Fully\Repositories\Entity\CacheDecorator as EntityCacheDecorator;
 
 use Fully\Repositories\SubCategory\SubCategoryRepository;
 use Fully\Repositories\SubCategory\CacheDecorator as SubCategoryCacheDecorator;
+
+
+use Fully\Repositories\Book\BookRepository;
+use Fully\Repositories\Book\CacheDecorator as BookCacheDecorator;
+
+
+use Fully\Repositories\Author\AuthorRepository;
+use Fully\Repositories\Author\CacheDecorator as AuthorCacheDecorator;
+
+use Fully\Repositories\Publisher\PublisherRepository;
+use Fully\Repositories\Publisher\CacheDecorator as PublisherCacheDecorator;
+
+use Fully\Repositories\BookRate\BookRateRepository;
+use Fully\Repositories\BookRate\CacheDecorator as BookRateCacheDecorator;
 
 
 use Fully\Services\Cache\FullyCache;
@@ -214,6 +231,57 @@ class RepositoryServiceProvider extends ServiceProvider
             }
 
             return $faq;
+        });
+
+        // author
+        $app->bind('Fully\Repositories\Author\AuthorInterface', function ($app) {
+
+            $author = new AuthorRepository(
+                new Author()
+            );
+
+            if ($app['config']->get('fully.cache') === true && $app['config']->get('is_admin', false) == false) {
+                $author = new AuthorCacheDecorator(
+                    $author,
+                    new FullyCache($app['cache'], 'authors')
+                );
+            }
+
+            return $author;
+        });
+
+        // publish
+        $app->bind('Fully\Repositories\Publisher\PublisherInterface', function ($app) {
+
+            $publisher = new PublisherRepository(
+                new Publisher()
+            );
+
+            if ($app['config']->get('fully.cache') === true && $app['config']->get('is_admin', false) == false) {
+                $publisher = new PublisherCacheDecorator(
+                    $publisher,
+                    new FullyCache($app['cache'], 'publisher')
+                );
+            }
+
+            return $publisher;
+        });
+
+        // book
+        $app->bind('Fully\Repositories\Book\BookInterface', function ($app) {
+
+            $book = new BookRepository(
+                new Book(), new Entity()
+            );
+
+            if ($app['config']->get('fully.cache') === true && $app['config']->get('is_admin', false) == false) {
+                $book = new BookCacheDecorator(
+                    $book,
+                    new FullyCache($app['cache'], 'book')
+                );
+            }
+
+            return $book;
         });
 
         // news

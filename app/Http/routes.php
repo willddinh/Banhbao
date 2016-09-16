@@ -194,6 +194,16 @@ Route::group(array('prefix' => LaravelLocalization::getCurrentLocale()), functio
        Route::get('tree-category/{group}', array('as' => 'admin.tree-category.index',
             'uses' => 'TreeCategoryController@getTreeCategories', ));
 
+        // publisher
+        Route::resource('publisher', 'PublisherController', array('before' => 'hasAccess:publisher'));
+        Route::get('publisher/{id}/delete', array('as' => 'admin.publisher.delete',
+            'uses' => 'PublisherController@confirmDestroy', ))->where('id', '[0-9]+');
+
+        // author
+        Route::resource('author', 'AuthorController', array('before' => 'hasAccess:author'));
+        Route::get('author/{id}/delete', array('as' => 'admin.author.delete',
+            'uses' => 'AuthorController@confirmDestroy', ))->where('id', '[0-9]+');
+
         // faq
         Route::resource('faq', 'FaqController', array('before' => 'hasAccess:faq'));
         Route::get('faq/{id}/delete', array('as' => 'admin.faq.delete',
