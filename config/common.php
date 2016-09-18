@@ -7,10 +7,14 @@
  */
 
 return [
-    "category_group" =>["product", "article"],
-    "const"=>["CATEGORY_PRODUCT"=>"product",
-              "CATEGORY_ARTICLE"=>"article",
-              "SUBCATEGORY_PRODUCT"=>"subProduct",],
+    "category_group" =>["book", "article", "fashion"],
+    "subCategory_group" =>["book", "article", "fashion"],
+    "const"=>["CATEGORY_BOOK"=>"book",
+        "CATEGORY_ARTICLE"=>"article",
+        "CATEGORY_FASHION"=>"fashion",
+        "SUBCATEGORY_BOOK"=>"book",
+        "SUBCATEGORY_ARTICLE"=>"article",
+        "SUBCATEGORY_FASHION"=>"fashion",],
 
 ];
 

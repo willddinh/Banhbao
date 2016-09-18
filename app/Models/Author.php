@@ -2,22 +2,29 @@
 
 namespace Fully\Models;
 
+use Fully\Events\Observer\UserAuditObserver;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Fully\Interfaces\ModelInterface as ModelInterface;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Author extends Model implements ModelInterface , SluggableInterface
+class Author extends BaseModel implements ModelInterface , SluggableInterface
 {
     use SluggableTrait;
-
+    use SoftDeletes;
     public $table = 'authors';
+    protected $fillable = array('name');
     protected $appends = ['url'];
 
     protected $sluggable = array(
         'build_from' => 'name',
         'save_to' => 'slug',
     );
+
+    
+
+    protected $dates = ['deleted_at'];
 
     public function books()
     {

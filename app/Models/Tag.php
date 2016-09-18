@@ -12,7 +12,7 @@ use Fully\Interfaces\ModelInterface as ModelInterface;
  *
  * @author Sefa Karagöz <karagozsefa@gmail.com>
  */
-class Tag extends Model implements ModelInterface , SluggableInterface
+class Tag extends BaseModel implements ModelInterface , SluggableInterface
 {
     use SluggableTrait;
 

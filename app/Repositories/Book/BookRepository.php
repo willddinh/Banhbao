@@ -2,9 +2,11 @@
 
 namespace Fully\Repositories\Book;
 
+use Fully\Models\Author;
 use Fully\Models\Entity;
 use Fully\Models\Book;
 use Config;
+use Fully\Models\Publisher;
 use Fully\Models\SubCategory;
 use Response;
 use Fully\Models\Tag;
@@ -287,6 +289,12 @@ class BookRepository extends RepositoryAbstract implements BookInterface, Crudab
             if ($this->book->fill($attributes)->save()) {
                 $category = Category::query()->find($attributes['category']);
                 $category->books()->save($this->book);
+
+                $author = Author::query()->find($attributes['author']);
+                $author->books()->save($this->book);
+
+                $publisher = Publisher::query()->find($attributes['publisher']);
+                $publisher->books()->save($this->book);
             }
 
             //Event::fire('Book.created', $this->Book);
@@ -350,26 +358,13 @@ class BookRepository extends RepositoryAbstract implements BookInterface, Crudab
                 $this->book->resluggify();
                 $category = Category::find($attributes['category']);
                 $category->books()->save($this->book);
+
+                $author = Author::query()->find($attributes['author']);
+                $author->books()->save($this->book);
+
+                $publisher = Publisher::query()->find($attributes['publisher']);
+                $publisher->books()->save($this->book);
             }
-
-           /* $bookTags = explode(',', $attributes['tag']);
-
-            foreach ($bookTags as $bookTag) {
-                if (!$bookTag) {
-                    continue;
-                }
-
-                $tag = Tag::where('name', '=', $bookTag)->where('lang', $this->getLang()) ->first();
-
-                if (!$tag) {
-                    $tag = new Tag();
-                    $tag->lang = $this->getLang();
-                    $tag->name = $bookTag;
-                    $this->book->tags()->save($tag);
-                }
-
-
-            }*/
 
             return true;
         }
@@ -385,7 +380,9 @@ class BookRepository extends RepositoryAbstract implements BookInterface, Crudab
     public function delete($id)
     {
         $book = $this->book->findOrFail($id);
-        $book->tags()->detach();
+        $book->entity->subCategories()->detach();
+        $book->entity->tags()->detach();
+        $book->entity->delete();
         $book->delete();
     }
 

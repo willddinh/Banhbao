@@ -4,6 +4,7 @@ namespace Fully\Models;
 
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use Cviebrock\EloquentSluggable\SluggableInterface;
+use Fully\Events\Observer\UserAuditObserver;
 use Fully\Interfaces\ModelInterface as ModelInterface;
 
 /**
@@ -23,6 +24,8 @@ class Article extends BaseModel implements ModelInterface, SluggableInterface
         'build_from' => 'title',
         'save_to' => 'slug',
     );
+
+    
 
     public function tags()
     {

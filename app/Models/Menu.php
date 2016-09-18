@@ -12,7 +12,7 @@ use Fully\Repositories\PhotoGallery\PhotoGalleryRepository;
  *
  * @author Sefa Karagöz <karagozsefa@gmail.com>
  */
-class Menu extends Model
+class Menu extends BaseModel
 {
     public $table = 'menus';
     protected $fillable = ['title', 'url', 'order', 'type', 'selected', 'mnugroup'];

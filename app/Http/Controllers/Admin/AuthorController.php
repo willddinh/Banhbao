@@ -18,7 +18,7 @@ class AuthorController extends Controller
 
     public function __construct(AuthorInterface $author)
     {
-        $this->publisher = $author;
+        $this->author = $author;
         $this->perPage = config('fully.per_page');
     }
 
@@ -29,7 +29,7 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        $pagiData = $this->publisher->paginate(Input::get('page', 1), $this->perPage, true);
+        $pagiData = $this->author->paginate(Input::get('page', 1), $this->perPage, true);
         $authors = Pagination::makeLengthAware($pagiData->items, $pagiData->totalItems, $this->perPage);
 
         return view('backend.author.index', compact('authors'));
@@ -53,7 +53,7 @@ class AuthorController extends Controller
     public function store()
     {
         try {
-            $this->publisher->create(Input::all());
+            $this->author->create(Input::all());
             Flash::message('Author was successfully added');
 
             return langRedirectRoute('admin.author.index');
@@ -71,9 +71,9 @@ class AuthorController extends Controller
      */
     public function show($id)
     {
-        $author = $this->publisher->find($id);
+        $author = $this->author->find($id);
 
-        return view('backend.author.show', compact('publisher'));
+        return view('backend.author.show', compact('author'));
     }
 
     /**
@@ -85,9 +85,9 @@ class AuthorController extends Controller
      */
     public function edit($id)
     {
-        $author = $this->publisher->find($id);
+        $author = $this->author->find($id);
 
-        return view('backend.author.edit', compact('publisher'));
+        return view('backend.author.edit', compact('author'));
     }
 
     /**
@@ -100,7 +100,7 @@ class AuthorController extends Controller
     public function update($id)
     {
         try {
-            $this->publisher->update($id, Input::all());
+            $this->author->update($id, Input::all());
             Flash::message('Author was successfully updated');
 
             return langRedirectRoute('admin.author.index');
@@ -118,7 +118,7 @@ class AuthorController extends Controller
      */
     public function destroy($id)
     {
-        $this->publisher->delete($id);
+        $this->author->delete($id);
         Flash::message('Author was successfully deleted');
 
         return langRedirectRoute('admin.author.index');
@@ -131,7 +131,7 @@ class AuthorController extends Controller
      */
     public function confirmDestroy($id)
     {
-        $author = $this->publisher->find($id);
+        $author = $this->author->find($id);
 
         return view('backend.author.confirm-destroy', compact('author'));
     }

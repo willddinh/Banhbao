@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @author Sefa Karagöz <karagozsefa@gmail.com>
  */
-class Photo extends Model
+class Photo extends BaseModel
 {
     public $table = 'photos';
     public $timestamps = false;

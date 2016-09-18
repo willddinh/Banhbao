@@ -12,7 +12,7 @@ use Fully\Interfaces\ModelInterface as ModelInterface;
  *
  * @author Sefa Karagöz <karagozsefa@gmail.com>
  */
-class TreeCategory extends Model implements ModelInterface, SluggableInterface
+class TreeCategory extends BaseModel implements ModelInterface, SluggableInterface
 {
     use SluggableTrait;
 

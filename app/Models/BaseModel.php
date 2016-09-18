@@ -2,6 +2,7 @@
 
 namespace Fully\Models;
 
+use Fully\Events\Observer\UserAuditObserver;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -15,6 +16,12 @@ class BaseModel extends Model
     public function hasAttribute($attr)
     {
         return array_key_exists($attr, $this->attributes);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        self::observe(new UserAuditObserver());
     }
     
     public function scopeSearch($query, $search)

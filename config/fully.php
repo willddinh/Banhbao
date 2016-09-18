@@ -119,6 +119,9 @@ return [
         'category' => [
             'per_page' => 10,
         ],
+        'subCategory' => [
+            'per_page' => 10,
+        ],
         'faq'      => [],
         'page'     => [],
         'video'    => [

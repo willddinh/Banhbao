@@ -144,4 +144,9 @@ class AuthorRepository extends RepositoryAbstract implements AuthorInterface, Cr
     {
         return $this->author->where('lang', $this->getLang())->count();
     }
+
+    public function findByGroupForDropDown()
+    {
+        return $this->author->where('lang', $this->getLang())->lists('name', 'id');
+    }
 }

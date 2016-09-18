@@ -178,6 +178,11 @@ Route::group(array('prefix' => LaravelLocalization::getCurrentLocale()), functio
         Route::get('product/{id}/delete', array('as' => 'admin.product.delete',
             'uses' => 'ProductController@confirmDestroy', ))->where('id', '\d+');
 
+        // book
+        Route::resource('book', 'BookController', array('before' => 'hasAccess:book'));
+        Route::get('book/{id}/delete', array('as' => 'admin.book.delete',
+            'uses' => 'BookController@confirmDestroy', ))->where('id', '\d+');
+
         // news
         Route::resource('news', 'NewsController', array('before' => 'hasAccess:news'));
         Route::get('news/{id}/delete', array('as' => 'admin.news.delete',
@@ -187,6 +192,11 @@ Route::group(array('prefix' => LaravelLocalization::getCurrentLocale()), functio
         Route::resource('category', 'CategoryController', array('before' => 'hasAccess:category'));
         Route::get('category/{id}/delete', array('as' => 'admin.category.delete',
                                                  'uses' => 'CategoryController@confirmDestroy', ))->where('id', '[0-9]+');
+
+        // subCategory
+        Route::resource('subCategory', 'SubCategoryController', array('before' => 'hasAccess:subCategory'));
+        Route::get('subCategory/{id}/delete', array('as' => 'admin.subCategory.delete',
+            'uses' => 'SubCategoryController@confirmDestroy', ))->where('id', '[0-9]+');
 
         // tree category
 //        Route::resource('tree-category', 'TreeCategoryController', array('before' => 'hasAccess:tree_category'));

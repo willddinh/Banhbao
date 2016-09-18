@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @author Sefa Karagöz <karagozsefa@gmail.com>
  */
-class Slider extends Model
+class Slider extends BaseModel
 {
     public $table = 'sliders';
 

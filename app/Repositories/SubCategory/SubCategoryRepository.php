@@ -145,7 +145,7 @@ class SubCategoryRepository extends RepositoryAbstract implements SubCategoryInt
         $updateRules = $this::$rules;
         $updateRules["title"] = $updateRules["title"].",title,$id";
         if ($this->isValid($attributes, $updateRules)) {
-            $this->subCategory->resluggify();
+//            $this->subCategory->resluggify();
             $this->subCategory->fill($attributes)->save();
 
             return true;

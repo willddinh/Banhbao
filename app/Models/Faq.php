@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @author Sefa Karagöz <karagozsefa@gmail.com>
  */
-class Faq extends Model
+class Faq extends BaseModel
 {
     public $table = 'faqs';
     protected $fillable = array('question', 'answer');

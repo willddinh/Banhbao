@@ -144,4 +144,9 @@ class PublisherRepository extends RepositoryAbstract implements PublisherInterfa
     {
         return $this->publisher->where('lang', $this->getLang())->count();
     }
+
+    public function findByGroupForDropDown()
+    {
+        return $this->publisher->where('lang', $this->getLang())->lists('name', 'id');
+    }
 }

@@ -36,6 +36,11 @@ class Category extends Model implements ModelInterface, SluggableInterface
         return $this->hasMany('Fully\Models\Product');
     }
 
+    public function books()
+    {
+        return $this->hasMany('Fully\Models\Book');
+    }
+
     public function setUrlAttribute($value)
     {
         $this->attributes['url'] = $value;

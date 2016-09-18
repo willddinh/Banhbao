@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @author Sefa Karagöz <karagozsefa@gmail.com>
  */
-class Setting extends Model
+class Setting extends BaseModel
 {
     public $table = 'settings';
     public $fillable = ['settings', 'lang'];

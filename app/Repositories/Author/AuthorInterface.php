@@ -11,4 +11,5 @@ use Fully\Repositories\RepositoryInterface;
  */
 interface AuthorInterface extends RepositoryInterface
 {
+    public function findByGroupForDropDown();
 }

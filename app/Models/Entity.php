@@ -13,11 +13,7 @@ class Entity extends BaseModel
 
     protected $dates = ['deleted_at'];
 
-    protected static function boot()
-    {
-        parent::boot();
-        self::observe(new UserAuditObserver());
-    }
+    
 
 
     public function tags()
