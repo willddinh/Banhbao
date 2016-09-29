@@ -157,6 +157,7 @@ return [
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         Sseffa\VideoApi\VideoApiServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Cviebrock\LaravelElasticsearch\ServiceProvider::class,
     ],
     /*
     |--------------------------------------------------------------------------
@@ -217,7 +218,8 @@ return [
         'VideoApi'            => Sseffa\VideoApi\Facades\VideoApi::class,
         'Feeder'              => Fully\Feeder\Facade\Feeder::class,
         'Search'              => Fully\Search\Facade\Search::class,
-        'Flash'               => Laracasts\Flash\Flash::class
+        'Flash'               => Laracasts\Flash\Flash::class,
+        'Elasticsearch' => Cviebrock\LaravelElasticsearch\Facade::class,
 
     ],
 

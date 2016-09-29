@@ -4,6 +4,8 @@ namespace Fully\Models;
 
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use Cviebrock\EloquentSluggable\SluggableInterface;
+use Elasticsearch\Client;
+use Fully\Events\Observer\ElasticsearchObserver;
 use Fully\Interfaces\ModelInterface as ModelInterface;
 use Fully\Models\Traits\EntitySupportTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -27,6 +29,11 @@ class Book extends BaseModel implements ModelInterface, SluggableInterface
 
     protected $dates = ['deleted_at'];
 
+    protected static function boot()
+    {
+        parent::boot();
+        self::observe(new ElasticsearchObserver());
+    }
 
     public function entity(){
         return $this->belongsTo('Fully\Models\Entity');
