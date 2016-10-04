@@ -158,6 +158,7 @@ return [
         Sseffa\VideoApi\VideoApiServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Cviebrock\LaravelElasticsearch\ServiceProvider::class,
+        Websight\GcsProvider\CloudStorageServiceProvider::class,
     ],
     /*
     |--------------------------------------------------------------------------
