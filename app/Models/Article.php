@@ -4,7 +4,6 @@ namespace Fully\Models;
 
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use Cviebrock\EloquentSluggable\SluggableInterface;
-use Fully\Events\Observer\UserAuditObserver;
 use Fully\Interfaces\ModelInterface as ModelInterface;
 
 /**

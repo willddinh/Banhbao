@@ -1,0 +1,14 @@
+{
+  "mappings": {
+    "books" : {
+      "properties" : {
+        "title" : { "type" : "string" },
+        "id" : { "type" : "integer" },
+        "book_suggest" : {
+          "type" :     "completion",
+          "payload":    "true"
+        }
+      }
+    }
+  }
+}

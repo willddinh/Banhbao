@@ -79,6 +79,16 @@ return [
             'region'    => 'IAD',
             'url_type'  => 'publicURL',
         ],
+        'gcs' => [
+            // Select the Google Cloud Storage Disk
+            'driver'         => 'gcs',
+            // OPTIONAL: The location of the json service account certificate, see below
+            // 'credentials' => storage_path('my-service-account-credentials.json'),
+            // OPTIONAL: The GCP project id, see below
+            // 'project_id'  => 'my-project-id-4711',
+            // The bucket you want this disk to point at
+            'bucket'         => 'banhbaovietnam',
+        ],
 
     ],
 
