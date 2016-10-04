@@ -1,3 +1,4 @@
+curl -X PUT localhost:9200/banhbao -d '
 {
   "mappings": {
     "books" : {
@@ -11,4 +12,4 @@
       }
     }
   }
-}
+}'

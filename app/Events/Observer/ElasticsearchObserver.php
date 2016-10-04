@@ -22,7 +22,7 @@ class ElasticsearchObserver
 
     public function created(Book $book)
     {
-        $input = $this->createInputs($book->entity->title." ".$book->author->name);
+       /* $input = $this->createInputs($book->entity->title." ".$book->author->name);
         $output = $book->entity->title." - ".$book->author->name;
         $payload = ["photo" => $book->path];
         \Elasticsearch::index([
@@ -32,7 +32,7 @@ class ElasticsearchObserver
             'body' => [ "title"=>$book->entity->title, "id" =>$book->entity_id,
                 "book_suggest"=>["input" => $input,
                 "output"=>$output, "payload"=>$payload] ]
-        ]);
+        ]);*/
     }
 
     public function updated(Book $book)
