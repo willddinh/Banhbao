@@ -69,16 +69,6 @@
                 </ul>
             </li>
 
-            <li class="treeview {{ setActive('admin/product*') }}"><a href="#"> <i class="fa fa-bookmark"></i> <span>Product</span>
-                    <i class="fa fa-angle-down pull-right"></i> </a>
-                <ul class="treeview-menu">
-                    <li><a href="{{ url(getLang() . '/admin/product') }}"><i class="fa fa-folder"></i> All Product</a>
-                    </li>
-                    <li><a href="{{ url(getLang() . '/admin/product/create') }}"><i class="fa fa-plus-square"></i> Add Product</a>
-                    </li>
-                </ul>
-            </li>
-
             <li class="treeview {{ setActive('admin/book*') }}"><a href="#"> <i class="fa fa-bookmark"></i> <span>Book</span>
                     <i class="fa fa-angle-down pull-right"></i> </a>
                 <ul class="treeview-menu">

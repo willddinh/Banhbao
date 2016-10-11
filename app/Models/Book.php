@@ -70,4 +70,12 @@ class Book extends BaseModel implements ModelInterface, SluggableInterface
     }
 
 
+    public function getGoogleImage()
+    {
+        return 'https://storage.googleapis.com/banhbaovietnam/'.$this->file_name;
+    }
+
+
+
+
 }
