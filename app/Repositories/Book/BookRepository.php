@@ -270,7 +270,7 @@ class BookRepository extends RepositoryAbstract implements BookInterface, Crudab
 
                 $storageClient = new StorageClient([
                     'projectId' => 'plated-analyzer-138323',
-                    'keyFilePath' => storage_path('app\banhbaostorage.json'),
+                    'keyFilePath' => storage_path('app/banhbaostorage.json'),
                 ]);
                 $bucket = $storageClient->bucket('banhbaovietnam');
                 $adapter = new GoogleStorageAdapter($storageClient, $bucket);
@@ -345,7 +345,7 @@ class BookRepository extends RepositoryAbstract implements BookInterface, Crudab
 
                     $storageClient = new StorageClient([
                         'projectId' => 'plated-analyzer-138323',
-                        'keyFilePath' => storage_path('app\banhbaostorage.json'),
+                        'keyFilePath' => storage_path('app/banhbaostorage.json'),
                     ]);
                     $bucket = $storageClient->bucket('banhbaovietnam');
                     $adapter = new GoogleStorageAdapter($storageClient, $bucket);
