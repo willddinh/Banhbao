@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2016-09-20 20:29:46
+Date: 2016-10-11 22:29:33
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -182,7 +182,7 @@ CREATE TABLE `books` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_by` int(10) unsigned zerofill DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of books
@@ -205,7 +205,19 @@ INSERT INTO `books` VALUES ('54', '50', '<p>on provident, similique sunt in culp
 INSERT INTO `books` VALUES ('55', '51', '<p>rough weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is</p>\r\n', '434', '', '0', 'kness-of-will-which-is-the', '33000.00', '14', '', '', 'img/book1.png', 'hethongchinhanh.png', '70559', null, '3232', '234', '7', '10', null, '1', 'vi', '2016-09-20 11:17:25', '2016-09-20 11:17:25', null, '0000000001');
 INSERT INTO `books` VALUES ('56', '52', '<p>&nbsp;est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, om</p>\r\n', 'Nam ', '', '0', 'est-et-expedita-distinctio-nam-libero', '33000.00', '4', '', '', 'img/book1.png', 'maybay1.png', '104813', null, '2323', '234', '6', '8', null, '1', 'vi', '2016-09-20 11:18:24', '2016-09-20 11:18:24', null, '0000000001');
 INSERT INTO `books` VALUES ('57', '53', '<p>ness of will, which is the same as sayi</p>\r\n', '3434', '', '0', 'ness-of-will-which-is-the-same-as-sayi', '24000.00', '4', '', '', 'img/book1.png', 'suckhoe-lamdep.png', '30318', null, '243', '234', '8', '7', null, '1', 'vi', '2016-09-20 11:19:38', '2016-09-20 11:19:39', null, '0000000001');
-INSERT INTO `books` VALUES ('58', '54', '<p>issimos ducimus qui blanditiis praesentium</p>\r\n', '2345676', '', '0', 'issimos-ducimus-qui-blanditiis-praesentium', '34400.00', '14', '', '', 'img/book1.png', 'maybay2.png', '115959', null, '2323', '324', '9', '8', null, '1', 'vi', '2016-09-20 11:20:56', '2016-09-20 11:20:56', null, '0000000001');
+INSERT INTO `books` VALUES ('58', '54', '<p>issimos ducimus qui blanditiis praesentium</p>\r\n', '2345676', '', '0', 'tinh-yeu-tren-song-quan-ho', '34400.00', '14', '', '', 'img/book1.png', 'maybay2.png', '115959', null, '2323', '324', '9', '8', null, '1', 'vi', '2016-09-20 11:20:56', '2016-10-03 17:56:28', null, '0000000001');
+INSERT INTO `books` VALUES ('59', '55', '<p>gsdfgsdfg</p>\r\n', 'asdfasdf', '', '10', 'con-song-tuoi-tho', '20000.00', '4', '', '', null, null, null, null, '1', '300', '6', '3', null, '1', 'vi', '2016-09-20 14:29:42', '2016-10-03 17:49:01', null, '0000000001');
+INSERT INTO `books` VALUES ('60', '56', '<p>fasdfasd</p>\r\n', 'asdfasdf', '', '10', 'chao-song-ma', '20000.00', '13', '', '', null, null, null, null, '1', '300', '6', '8', null, '1', 'vi', '2016-09-20 14:32:46', '2016-10-03 17:48:36', null, '0000000001');
+INSERT INTO `books` VALUES ('61', '57', '<p>sdgsdfg</p>\r\n', 'asdfasdf', '', '10', 'xin-chao-ba-con', '20000.00', '4', '', '', null, null, null, null, '1', '300', '6', '8', null, '1', 'vi', '2016-09-20 14:33:09', '2016-10-03 17:48:01', null, '0000000001');
+INSERT INTO `books` VALUES ('62', '58', '<p>love</p>\r\n', 'love1212', '', '0', 'when-i-see-your-smile', '0.00', '4', '', '', null, null, null, null, '', '', null, null, null, '1', 'vi', '2016-10-06 15:59:28', '2016-10-06 15:59:29', null, '0000000001');
+INSERT INTO `books` VALUES ('63', '59', '<p>love</p>\r\n', 'love1212', '', '0', 'when-i-see-your-smile-1', '0.00', '4', '', '', null, null, null, null, '', '', '6', '3', null, '1', 'vi', '2016-10-06 16:00:28', '2016-10-06 16:00:28', null, '0000000001');
+INSERT INTO `books` VALUES ('64', '60', '<p>hello</p>\r\n', 'link top', '', '0', 'top-link', '0.00', '4', '', '', null, null, null, null, '', '', '6', '3', null, '1', 'vi', '2016-10-06 16:03:06', '2016-10-06 16:03:06', null, '0000000001');
+INSERT INTO `books` VALUES ('65', '61', '<p>sds ds ds</p>\r\n', '232 232', '', '0', 'live-by-food', '0.00', '4', '', '', null, null, null, null, '', '', '6', '3', null, '1', 'vi', '2016-10-06 16:03:38', '2016-10-06 16:05:20', null, '0000000001');
+INSERT INTO `books` VALUES ('66', '62', '<p>22</p>\r\n', 'tlrrtl', '', '0', 'look-around-the-conrner', '0.00', '0', '', '', null, null, null, null, '', '', null, null, null, '0', 'vi', '2016-10-06 16:09:05', '2016-10-06 16:09:05', null, '0000000001');
+INSERT INTO `books` VALUES ('67', '63', '<p>sds ds d</p>\r\n', '33 ', '', '0', 'loi-cua-gio', '0.00', '4', '', '', null, null, null, null, '', '', '6', '3', null, '0', 'vi', '2016-10-06 16:10:16', '2016-10-06 16:10:21', null, '0000000001');
+INSERT INTO `books` VALUES ('68', '64', '<p>sdss</p>\r\n', '2334343', '', '0', 'toi-thay-con-bo', '13000.00', '4', '', '', '/uploads/book//anh520161011031507.png', 'anh520161011031507.png', '81636', null, '', '', '6', '3', null, '1', 'vi', '2016-10-10 16:14:21', '2016-10-11 15:15:09', null, '0000000001');
+INSERT INTO `books` VALUES ('69', '65', '<p>sds dsds</p>\r\n', '2344', '', '33', 'test-me-awile', '0.00', '4', '', '', '/uploads/book//anh320161011030531.png', 'anh320161011030531.png', '26149', null, '', '', '6', '3', null, '1', 'vi', '2016-10-11 15:05:32', '2016-10-11 15:05:32', null, '0000000001');
+INSERT INTO `books` VALUES ('70', '66', '<p>sds dsds</p>\r\n', '2344', '', '33', 'test-me-awile-1', '0.00', '4', '', '', '/uploads/book//anh20161011030720.png', 'anh20161011030720.png', '81041', null, '', '', '6', '3', null, '1', 'vi', '2016-10-11 15:07:22', '2016-10-11 15:07:23', null, '0000000001');
 
 -- ----------------------------
 -- Table structure for books_authors
@@ -304,7 +316,7 @@ CREATE TABLE `entity` (
   `currency_unit` varchar(20) DEFAULT NULL,
   `lang` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of entity
@@ -327,7 +339,19 @@ INSERT INTO `entity` VALUES ('50', '2016-09-20 11:16:29', '2016-09-20 11:16:29',
 INSERT INTO `entity` VALUES ('51', '2016-09-20 11:17:25', '2016-09-20 11:17:25', null, '1', 'kness of will, which is the ', '238000.00', null, 'vi');
 INSERT INTO `entity` VALUES ('52', '2016-09-20 11:18:24', '2016-09-20 11:18:24', null, '1', ' est et expedita distinctio. Nam libero', '346000.00', null, 'vi');
 INSERT INTO `entity` VALUES ('53', '2016-09-20 11:19:38', '2016-09-20 11:19:38', null, '1', 'ness of will, which is the same as sayi', '124000.00', null, 'vi');
-INSERT INTO `entity` VALUES ('54', '2016-09-20 11:20:56', '2016-09-20 11:20:56', null, '1', 'issimos ducimus qui blanditiis praesentium', '2450000.00', null, 'vi');
+INSERT INTO `entity` VALUES ('54', '2016-09-20 11:20:56', '2016-10-03 17:56:28', null, '1', 'tinh yeu tren song quan ho', '2450000.00', null, 'vi');
+INSERT INTO `entity` VALUES ('55', '2016-09-20 14:29:41', '2016-10-03 17:48:58', null, '1', 'con song tuoi tho', '200000.00', null, 'vi');
+INSERT INTO `entity` VALUES ('56', '2016-09-20 14:32:46', '2016-10-03 17:48:35', null, '1', 'chao song ma', '200000.00', null, 'vi');
+INSERT INTO `entity` VALUES ('57', '2016-09-20 14:33:08', '2016-10-03 17:35:45', null, '1', 'xin chao ba con', '200000.00', null, 'vi');
+INSERT INTO `entity` VALUES ('58', '2016-10-06 15:59:28', '2016-10-06 15:59:28', null, '1', 'when i see your smile', '112.00', null, 'vi');
+INSERT INTO `entity` VALUES ('59', '2016-10-06 16:00:28', '2016-10-06 16:00:28', null, '1', 'when i see your smile', '112.00', null, 'vi');
+INSERT INTO `entity` VALUES ('60', '2016-10-06 16:03:06', '2016-10-06 16:03:06', null, '1', 'top link', '33.00', null, 'vi');
+INSERT INTO `entity` VALUES ('61', '2016-10-06 16:03:38', '2016-10-06 16:03:38', null, '1', 'live by food', '22.00', null, 'vi');
+INSERT INTO `entity` VALUES ('62', '2016-10-06 16:09:05', '2016-10-06 16:09:05', null, '1', 'look around the conrner', '333.00', null, 'vi');
+INSERT INTO `entity` VALUES ('63', '2016-10-06 16:10:16', '2016-10-06 16:10:16', null, '1', 'loi cua gio', '33.00', null, 'vi');
+INSERT INTO `entity` VALUES ('64', '2016-10-10 16:14:21', '2016-10-10 16:14:21', null, '1', 'toi thay con bo', '230000.00', null, 'vi');
+INSERT INTO `entity` VALUES ('65', '2016-10-11 15:05:32', '2016-10-11 15:05:32', null, '1', 'test me awile', '232.00', null, 'vi');
+INSERT INTO `entity` VALUES ('66', '2016-10-11 15:07:22', '2016-10-11 15:07:22', null, '1', 'test me awile', '232.00', null, 'vi');
 
 -- ----------------------------
 -- Table structure for entity_categories
@@ -342,7 +366,7 @@ CREATE TABLE `entity_categories` (
   PRIMARY KEY (`id`),
   KEY `idx_entity_id` (`entity_id`),
   KEY `idx_cat_id` (`sub_category_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of entity_categories
@@ -370,8 +394,12 @@ INSERT INTO `entity_categories` VALUES ('56', '50', '8', '2016-09-20 18:16:30', 
 INSERT INTO `entity_categories` VALUES ('57', '51', '7', '2016-09-20 18:17:25', '2016-09-20 18:17:25');
 INSERT INTO `entity_categories` VALUES ('58', '53', '6', '2016-09-20 18:19:38', '2016-09-20 18:19:38');
 INSERT INTO `entity_categories` VALUES ('59', '53', '7', '2016-09-20 18:19:38', '2016-09-20 18:19:38');
-INSERT INTO `entity_categories` VALUES ('60', '54', '6', '2016-09-20 18:20:56', '2016-09-20 18:20:56');
-INSERT INTO `entity_categories` VALUES ('61', '54', '8', '2016-09-20 18:20:56', '2016-09-20 18:20:56');
+INSERT INTO `entity_categories` VALUES ('72', '57', '6', '2016-10-04 00:48:01', '2016-10-04 00:48:01');
+INSERT INTO `entity_categories` VALUES ('73', '56', '7', '2016-10-04 00:48:36', '2016-10-04 00:48:36');
+INSERT INTO `entity_categories` VALUES ('74', '55', '8', '2016-10-04 00:48:59', '2016-10-04 00:48:59');
+INSERT INTO `entity_categories` VALUES ('75', '54', '6', '2016-10-04 00:56:28', '2016-10-04 00:56:28');
+INSERT INTO `entity_categories` VALUES ('76', '54', '8', '2016-10-04 00:56:28', '2016-10-04 00:56:28');
+INSERT INTO `entity_categories` VALUES ('78', '64', '6', '2016-10-11 22:15:08', '2016-10-11 22:15:08');
 
 -- ----------------------------
 -- Table structure for entity_tags
@@ -525,6 +553,36 @@ INSERT INTO `menus` VALUES ('15', 'Faq', '/en/faq', '6', '0', 'module', 'faq', '
 INSERT INTO `menus` VALUES ('16', 'Contact Us', '/en/contact', '7', '0', 'module', 'contact', '1', '2016-06-13 08:57:32', '2016-06-13 09:13:03', 'en', 'home');
 
 -- ----------------------------
+-- Table structure for merchant_transactions
+-- ----------------------------
+DROP TABLE IF EXISTS `merchant_transactions`;
+CREATE TABLE `merchant_transactions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `provider` varchar(50) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `init_amount` decimal(10,0) DEFAULT NULL,
+  `order_id` varchar(50) DEFAULT NULL,
+  `order_info` varchar(50) DEFAULT NULL,
+  `status` varchar(50) DEFAULT NULL,
+  `transaction_amount` decimal(10,0) DEFAULT NULL,
+  `card_name` varchar(50) DEFAULT NULL,
+  `card_type` varchar(50) DEFAULT NULL,
+  `order_type` varchar(50) DEFAULT NULL,
+  `request_time` timestamp NULL DEFAULT NULL,
+  `response_code` varchar(50) DEFAULT NULL,
+  `response_message` varchar(50) DEFAULT NULL,
+  `response_time` timestamp NULL DEFAULT NULL,
+  `trans_ref` varchar(50) DEFAULT NULL,
+  `trans_status` varchar(50) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of merchant_transactions
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for migrations
 -- ----------------------------
 DROP TABLE IF EXISTS `migrations`;
@@ -632,7 +690,7 @@ CREATE TABLE `persistences` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `persistences_code_unique` (`code`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of persistences
@@ -652,6 +710,14 @@ INSERT INTO `persistences` VALUES ('14', '1', 'uko5A3pc1yLHFPA1IKXmUV4oDa7SJu81'
 INSERT INTO `persistences` VALUES ('15', '1', '8LlsGbNI6XmrF3KGchdJyqGBFgwxcz5y', '2016-09-19 22:43:12', '2016-09-19 22:43:12');
 INSERT INTO `persistences` VALUES ('16', '1', 'HbvEmsJNkflz2ugVMSAxmisAT1mVtsF2', '2016-09-20 06:45:57', '2016-09-20 06:45:57');
 INSERT INTO `persistences` VALUES ('17', '1', 'uHCFFuNxCQkGxKLKx5C80g9QeV6hHsgh', '2016-09-20 10:54:11', '2016-09-20 10:54:11');
+INSERT INTO `persistences` VALUES ('18', '1', 'cbrQ2J2YM9COdvMMlSjiq14IfbhKERxz', '2016-09-20 14:17:47', '2016-09-20 14:17:47');
+INSERT INTO `persistences` VALUES ('19', '1', 'QtYkD37aFtq7pvZ6g1q9CJmjfTpjJC6G', '2016-09-20 14:26:30', '2016-09-20 14:26:30');
+INSERT INTO `persistences` VALUES ('20', '1', '0eQl4W6EPExARwW0SkuKJOPr2911AJss', '2016-09-28 15:51:26', '2016-09-28 15:51:26');
+INSERT INTO `persistences` VALUES ('21', '1', 'WlGyis5doDljljIXPXGdWVzxJJMFPuGh', '2016-10-03 17:35:00', '2016-10-03 17:35:00');
+INSERT INTO `persistences` VALUES ('22', '1', '4kZOvPlqLSagZ2iXrAOw0E7cUn7gEzAU', '2016-10-03 17:39:19', '2016-10-03 17:39:19');
+INSERT INTO `persistences` VALUES ('23', '1', 'S4Bv93lg6lWJTsJ8b9HVXjJegAtE6fKG', '2016-10-06 15:58:34', '2016-10-06 15:58:34');
+INSERT INTO `persistences` VALUES ('24', '1', 'J2OffHlGAiCTBuXqpbltu5VuRwAcYtXk', '2016-10-10 13:45:48', '2016-10-10 13:45:48');
+INSERT INTO `persistences` VALUES ('25', '1', 'vn5KhKj0isyNaaPrVL0IeiPOEfpEnWDu', '2016-10-11 15:04:52', '2016-10-11 15:04:52');
 
 -- ----------------------------
 -- Table structure for photos
@@ -1006,11 +1072,13 @@ CREATE TABLE `throttle` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   KEY `throttle_user_id_index` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of throttle
 -- ----------------------------
+INSERT INTO `throttle` VALUES ('1', null, 'global', null, '2016-09-20 14:17:34', '2016-09-20 14:17:34');
+INSERT INTO `throttle` VALUES ('2', null, 'ip', '192.168.1.9', '2016-09-20 14:17:34', '2016-09-20 14:17:34');
 
 -- ----------------------------
 -- Table structure for tree_categories
@@ -1053,6 +1121,11 @@ CREATE TABLE `users` (
   `last_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `sex` varchar(5) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `fabook_id` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `locale` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `time_zone` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `birthday` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -1060,12 +1133,80 @@ CREATE TABLE `users` (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1', 'letrongduong81@gmail.com', '$2y$10$032nkB8qxbraCQhUSAhW3.NXhqnExR4f5bLBKYI0GRbkAWWewdDlC', null, '2016-09-20 10:54:12', 'duong', 'le', '2016-06-13 08:57:11', '2016-09-20 10:54:12');
-INSERT INTO `users` VALUES ('2', 'admin@admin.com', '$2y$10$1i9siAeIJfUMijD0SRFGh.8XfUSvigvd8A1.Xdi94KF4dYiSIbZO2', null, null, 'Super', 'Admin', '2016-06-13 08:57:11', '2016-06-13 08:57:11');
-INSERT INTO `users` VALUES ('3', 'duong81@gmail.com', '$2y$10$tgW4UfIMkVJY2UoCvcZMmut4h6m4o7KaGre/RoORxdPJRr3pTcm4K', null, null, 'le', 'dan', '2016-06-16 10:41:37', '2016-06-16 10:41:37');
-INSERT INTO `users` VALUES ('4', 'ngduong81@gmail.com', '$2y$10$F/Bbf9/d3us19om5pSVkdeOUzzgukU1jamb0yn4cuBIQhb4ByCwNy', null, null, 'le', 'an', '2016-06-16 10:43:28', '2016-06-16 10:43:28');
-INSERT INTO `users` VALUES ('14', 'fdonuong81@gmail.com', '$2y$10$8N4giDdCjyzOM1pAp7gJ8.liOOW3/IV.GS6NwS5/5bSmiTGFuNbW6', null, '2016-06-17 07:47:50', 'laeas', 'wwsss', '2016-06-17 04:10:09', '2016-06-17 07:47:50');
-INSERT INTO `users` VALUES ('22', 'nguyenthihuong@gmail.com', '$2y$10$P6HGUzbfEx1Ti4WznHMYlOk39WL71wh23RZI6ejJBV/sg.k19vduS', null, null, 'led', 'duong', '2016-06-18 12:05:06', '2016-06-18 12:05:06');
+INSERT INTO `users` VALUES ('1', 'letrongduong81@gmail.com', '$2y$10$032nkB8qxbraCQhUSAhW3.NXhqnExR4f5bLBKYI0GRbkAWWewdDlC', null, '2016-10-11 15:04:52', 'duong', 'le', '2016-06-13 08:57:11', '2016-10-11 15:04:52', null, null, null, null, null);
+INSERT INTO `users` VALUES ('2', 'admin@admin.com', '$2y$10$1i9siAeIJfUMijD0SRFGh.8XfUSvigvd8A1.Xdi94KF4dYiSIbZO2', null, null, 'Super', 'Admin', '2016-06-13 08:57:11', '2016-06-13 08:57:11', null, null, null, null, null);
+INSERT INTO `users` VALUES ('3', 'duong81@gmail.com', '$2y$10$tgW4UfIMkVJY2UoCvcZMmut4h6m4o7KaGre/RoORxdPJRr3pTcm4K', null, null, 'le', 'dan', '2016-06-16 10:41:37', '2016-06-16 10:41:37', null, null, null, null, null);
+INSERT INTO `users` VALUES ('4', 'ngduong81@gmail.com', '$2y$10$F/Bbf9/d3us19om5pSVkdeOUzzgukU1jamb0yn4cuBIQhb4ByCwNy', null, null, 'le', 'an', '2016-06-16 10:43:28', '2016-06-16 10:43:28', null, null, null, null, null);
+INSERT INTO `users` VALUES ('14', 'fdonuong81@gmail.com', '$2y$10$8N4giDdCjyzOM1pAp7gJ8.liOOW3/IV.GS6NwS5/5bSmiTGFuNbW6', null, '2016-06-17 07:47:50', 'laeas', 'wwsss', '2016-06-17 04:10:09', '2016-06-17 07:47:50', null, null, null, null, null);
+INSERT INTO `users` VALUES ('22', 'nguyenthihuong@gmail.com', '$2y$10$P6HGUzbfEx1Ti4WznHMYlOk39WL71wh23RZI6ejJBV/sg.k19vduS', null, null, 'led', 'duong', '2016-06-18 12:05:06', '2016-06-18 12:05:06', null, null, null, null, null);
+
+-- ----------------------------
+-- Table structure for user_addresses
+-- ----------------------------
+DROP TABLE IF EXISTS `user_addresses`;
+CREATE TABLE `user_addresses` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `type` int(11) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `province` varchar(50) DEFAULT NULL,
+  `district` varchar(50) DEFAULT NULL,
+  `is_main` tinyint(4) DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user_addresses
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for user_balance
+-- ----------------------------
+DROP TABLE IF EXISTS `user_balance`;
+CREATE TABLE `user_balance` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `main_balance` decimal(10,0) NOT NULL,
+  `secondary_balance` decimal(10,0) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `status` varchar(10) NOT NULL,
+  `check_sum` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user_balance
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for user_transactions
+-- ----------------------------
+DROP TABLE IF EXISTS `user_transactions`;
+CREATE TABLE `user_transactions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `order_id` varchar(50) DEFAULT NULL,
+  `debt_account` varchar(50) DEFAULT NULL,
+  `creditor_account` varchar(50) DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL,
+  `price` decimal(10,0) DEFAULT NULL,
+  `total` decimal(10,0) DEFAULT NULL,
+  `transaction_group_id` varchar(50) DEFAULT NULL,
+  `detail` varchar(255) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `product_name` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `check_sum` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user_transactions
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for videos
