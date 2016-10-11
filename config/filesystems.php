@@ -82,6 +82,12 @@ return [
         'gcs' => [
             // Select the Google Cloud Storage Disk
             'driver'         => 'gcs',
+//            'service_account' => 'service@account.iam.gserviceaccount.com',
+            'service_account_json' => storage_path('app\My First Project-4067222379f5.json'),
+//            'credentials' => 'app/banhbaostorage.json',
+//            'service_account' => '1101061820492-compute@developer.gserviceaccount.com',
+//                'service_account_certificate'=>storage_path('app/banhbaostorage.json'),
+//                'service_account_certificate_password'=>'notasecret',
             // OPTIONAL: The location of the json service account certificate, see below
             // 'credentials' => storage_path('my-service-account-credentials.json'),
             // OPTIONAL: The GCP project id, see below

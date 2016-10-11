@@ -2,15 +2,19 @@
 
 namespace Fully\Repositories\Book;
 
+use Carbon\Carbon;
 use Fully\Models\Author;
 use Fully\Models\Entity;
 use Fully\Models\Book;
 use Config;
 use Fully\Models\Publisher;
 use Fully\Models\SubCategory;
+use Google\Cloud\Storage\StorageClient;
+use League\Flysystem\Filesystem;
 use Response;
 use Fully\Models\Tag;
 use Fully\Models\Category;
+use Storage;
 use Str;
 use Event;
 use Image;
@@ -18,6 +22,7 @@ use File;
 use Fully\Repositories\RepositoryAbstract;
 use Fully\Repositories\CrudableInterface as CrudableInterface;
 use Fully\Exceptions\Validation\ValidationException;
+use Superbalist\Flysystem\GoogleStorage\GoogleStorageAdapter;
 
 /**
  * Class BookRepository.
@@ -260,24 +265,27 @@ class BookRepository extends RepositoryAbstract implements BookInterface, Crudab
             }
 
             if ($file) {
-                $destinationPath = public_path().$this->imgDir;
                 $fileName = $file->getClientOriginalName();
                 $fileSize = $file->getClientSize();
 
-                $upload_success = $file->move($destinationPath, $fileName);
+                $storageClient = new StorageClient([
+                    'projectId' => 'plated-analyzer-138323',
+                    'keyFilePath' => storage_path('app\banhbaostorage.json'),
+                ]);
+                $bucket = $storageClient->bucket('banhbaovietnam');
+                $adapter = new GoogleStorageAdapter($storageClient, $bucket);
+                $filesystem = new Filesystem($adapter);
+                $fileInfoArr = pathinfo($fileName);
+                $fileName = $fileInfoArr['filename'].Carbon::now()->format("Ymdhis.").$fileInfoArr['extension'];
+                $upload_success = $filesystem->write($fileName, file_get_contents($file->getPathname()));
+
 
                 if ($upload_success) {
-
-                    // resizing an uploaded file
-                    Image::make($destinationPath.$fileName)->resize($this->width, $this->height)->save($destinationPath.$fileName);
-
-                    // thumb
-                    Image::make($destinationPath.$fileName)->resize($this->thumbWidth, $this->thumbHeight)->save($destinationPath.'thumb_'.$fileName);
 
                     $this->book->lang = $this->getLang();
                     $this->book->file_name = $fileName;
                     $this->book->file_size = $fileSize;
-                    $this->book->path = $this->imgDir.'/'.$fileName;
+                    $this->book->path = $fileName;
                 }
             }
 
@@ -288,13 +296,17 @@ class BookRepository extends RepositoryAbstract implements BookInterface, Crudab
             $this->book->lang = $this->getLang();
             if ($this->book->fill($attributes)->save()) {
                 $category = Category::query()->find($attributes['category']);
-                $category->books()->save($this->book);
+                $this->book->category()->associate($category);
+//                $category->books()->save($this->book);
 
                 $author = Author::query()->find($attributes['author']);
-                $author->books()->save($this->book);
+                $this->book->author()->associate($author);
+//                $author->books()->save($this->book);
 
                 $publisher = Publisher::query()->find($attributes['publisher']);
-                $publisher->books()->save($this->book);
+                $this->book->publisher()->associate($publisher);
+                $this->book->save();
+//                $publisher->books()->save($this->book);
             }
 
             //Event::fire('Book.created', $this->Book);
@@ -327,27 +339,29 @@ class BookRepository extends RepositoryAbstract implements BookInterface, Crudab
                 $file = $attributes['image'];
 
                 // delete old image
-                $destinationPath = public_path().$this->imgDir;
-                File::delete($destinationPath.$this->book->file_name);
-                File::delete($destinationPath.'thumb_'.$this->book->file_name);
+                if ($file) {
+                    $fileName = $file->getClientOriginalName();
+                    $fileSize = $file->getClientSize();
 
-                $destinationPath = public_path().$this->imgDir;
-                $fileName = $file->getClientOriginalName();
-                $fileSize = $file->getClientSize();
+                    $storageClient = new StorageClient([
+                        'projectId' => 'plated-analyzer-138323',
+                        'keyFilePath' => storage_path('app\banhbaostorage.json'),
+                    ]);
+                    $bucket = $storageClient->bucket('banhbaovietnam');
+                    $adapter = new GoogleStorageAdapter($storageClient, $bucket);
+                    $filesystem = new Filesystem($adapter);
+                    $fileInfoArr = pathinfo($fileName);
+                    $fileName = $fileInfoArr['filename'].Carbon::now()->format("Ymdhis.").$fileInfoArr['extension'];
+                    $upload_success = $filesystem->write($fileName, file_get_contents($file->getPathname()));
 
-                $upload_success = $file->move($destinationPath, $fileName);
 
-                if ($upload_success) {
+                    if ($upload_success) {
 
-                    // resizing an uploaded file
-                    Image::make($destinationPath.$fileName)->resize($this->width, $this->height)->save($destinationPath.$fileName);
-
-                    // thumb
-                    Image::make($destinationPath.$fileName)->resize($this->thumbWidth, $this->thumbHeight)->save($destinationPath.'thumb_'.$fileName);
-
-                    $this->book->file_name = $fileName;
-                    $this->book->file_size = $fileSize;
-                    $this->book->path = $this->imgDir.'/'.$fileName;
+                        $this->book->lang = $this->getLang();
+                        $this->book->file_name = $fileName;
+                        $this->book->file_size = $fileSize;
+                        $this->book->path = $fileName;
+                    }
                 }
             }
             //-------------------------------------------------------

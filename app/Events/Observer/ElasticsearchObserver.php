@@ -37,17 +37,20 @@ class ElasticsearchObserver
 
     public function updated(Book $book)
     {
-        $input = $this->createInputs($book->entity->title." ".$book->author->name);
-        $output = $book->entity->title." - ".$book->author->name;
-        $payload = ["photo" => $book->path, "entity_id"=>$book->entity_id];
-        \Elasticsearch::index([
-            'index' => 'banhbao',
-            'type' => 'books',
-            'id' => $book->entity_id,
-            'body' => [ "title"=>$book->entity->title, "id" =>$book->entity_id,
-                "book_suggest"=>["input" => $input,
-                    "output"=>$output, "payload"=>$payload] ]
-        ]);
+        if($book->author){
+            $input = $this->createInputs($book->entity->title." ".$book->author->name);
+            $output = $book->entity->title." - ".$book->author->name;
+            $payload = ["photo" => $book->path, "entity_id"=>$book->entity_id];
+            \Elasticsearch::index([
+                'index' => 'banhbao',
+                'type' => 'books',
+                'id' => $book->entity_id,
+                'body' => [ "title"=>$book->entity->title, "id" =>$book->entity_id,
+                    "book_suggest"=>["input" => $input,
+                        "output"=>$output, "payload"=>$payload] ]
+            ]);
+        }
+
     }
 
     public function deleted(Book $book)
