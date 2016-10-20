@@ -155,7 +155,9 @@ class BookRepository extends RepositoryAbstract implements BookInterface, Crudab
     public function createEntity($attributes){
         $this->entity->lang = $this->getLang();
 
-        $this->entity->fill(['title'=>$attributes['title'], 'price'=>$attributes['price']])->save();
+        $this->entity->fill(['title'=>$attributes['title'],
+            'price'=>$attributes['price'],
+            'rent_price'=>$attributes['rent_price']])->save();
 //save tags
         $tags = explode(',', $attributes['tag']);
 
@@ -200,7 +202,9 @@ class BookRepository extends RepositoryAbstract implements BookInterface, Crudab
     {
         $this->entity->lang = $this->getLang();
 
-        $this->entity->fill(['title'=>$attributes['title'], 'price'=>$attributes['price']])->save();
+        $this->entity->fill(['title'=>$attributes['title']
+            , 'price'=>$attributes['price']
+            , 'rent_price'=>$attributes['rent_price']])->save();
 //save tags
 
 
