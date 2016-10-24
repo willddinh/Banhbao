@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2016-10-11 22:29:33
+Date: 2016-10-24 07:52:29
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -37,6 +37,27 @@ INSERT INTO `activations` VALUES ('1', '1', 'rNKRMPRHB6orJKVwKzMlzn3BExfXv0Qy', 
 INSERT INTO `activations` VALUES ('2', '2', 'AiPXmQSClm3KjM46EHINnTXRrrYO1xzC', '1', '2016-06-13 08:57:11', '2016-06-13 08:57:11', '2016-06-13 08:57:11');
 INSERT INTO `activations` VALUES ('3', '3', 'qi5vyVeNq9FQFKtyP1NLXAGz3UF34hxC', '1', '2016-06-16 10:41:37', '2016-06-16 10:41:37', '2016-06-16 10:41:37');
 INSERT INTO `activations` VALUES ('4', '4', '2LnoNNbwrpdBArVvXt0GcCYb9sl1h4jw', '1', '2016-06-16 10:43:28', '2016-06-16 10:43:28', '2016-06-16 10:43:28');
+
+-- ----------------------------
+-- Table structure for app_session
+-- ----------------------------
+DROP TABLE IF EXISTS `app_session`;
+CREATE TABLE `app_session` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `session` varchar(100) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of app_session
+-- ----------------------------
+INSERT INTO `app_session` VALUES ('1', '$2y$2y$10$H/eqTSm2BVN7lqcRxnuhx.fIjsfnMN6hxTdo/ujLgPUVlIwL/j0I6', null, '2016-10-19 21:28:34', '2016-10-19 21:28:34');
+INSERT INTO `app_session` VALUES ('2', '$2y$10$M5c5cYZ4G7h9KW2SZxBGOucamH4rUIWTywdb1NPPLMANbLnWoDHiu', null, '2016-10-20 15:36:23', '2016-10-20 15:36:23');
+INSERT INTO `app_session` VALUES ('3', '$2y$10$Qv/srDCU5A2TU3i.8nNuq.f5uz/ZgOy9bXC7f42.LhAv2I0A952DS', null, '2016-10-20 21:20:57', '2016-10-20 21:20:57');
 
 -- ----------------------------
 -- Table structure for articles
@@ -162,7 +183,6 @@ CREATE TABLE `books` (
   `external_url` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `discount` int(3) DEFAULT NULL,
   `slug` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `rent_price` decimal(10,2) DEFAULT NULL,
   `category_id` int(11) NOT NULL,
   `meta_keywords` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `meta_description` text COLLATE utf8_unicode_ci,
@@ -187,37 +207,37 @@ CREATE TABLE `books` (
 -- ----------------------------
 -- Records of books
 -- ----------------------------
-INSERT INTO `books` VALUES ('40', '36', '<p>older</p>\r\n', null, '', '1', 'wake-me-up', null, '4', '', '', null, null, null, null, null, null, '6', '3', null, '1', 'vi', '2016-09-18 09:46:57', '2016-09-18 09:47:44', '0000-00-00 00:00:00', '0000000001');
-INSERT INTO `books` VALUES ('41', '37', '<p>run test</p>\r\n', 'isb', '', '12', 'noway-to-run-test', '33.00', '5', '', '', 'img/book1.png', 'mypham1.png', '4467', null, '233', '23', '7', '5', null, '1', 'vi', '2016-09-18 09:50:46', '2016-09-20 08:34:34', null, '0000000001');
-INSERT INTO `books` VALUES ('42', '38', '<p>time</p>\r\n', '', '', '2', 'we-need-to', '22.00', '4', '', '', 'img/book1.png', 'tuong.png', '35447', null, '', '', '6', '3', null, '1', 'vi', '2016-09-18 10:51:20', '2016-09-20 08:34:17', null, '0000000001');
-INSERT INTO `books` VALUES ('43', '39', '<p>so serious</p>\r\n', 'us unite', '', '33', 'when-music-make', '3.00', '4', '', '', 'img/book1.png', 'anh1.png', '267629', null, '43', '', '6', '3', null, '1', 'vi', '2016-09-18 10:55:15', '2016-09-20 08:34:02', null, '0000000001');
-INSERT INTO `books` VALUES ('44', '40', '<p>dfd</p>\r\n', 'have', '', '2', 'event', '0.00', '4', '', '', 'img/book1.png', 'cay.png', '46856', null, '938', '', '6', '3', null, '1', 'vi', '2016-09-18 10:57:35', '2016-09-20 08:33:32', null, '0000000001');
-INSERT INTO `books` VALUES ('45', '41', '<p>sds</p>\r\n', 'tag', '', '33', 'price', '2.00', '4', '', '', 'img/book1.png', 'cocin.png', '26866', null, 'jess', 'jfk', '6', '3', null, '1', 'vi', '2016-09-18 11:00:20', '2016-09-20 08:32:51', null, '0000000001');
-INSERT INTO `books` VALUES ('46', '42', '<p>is iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla par</p>\r\n', ' commod', '', '0', 'amet-consectetur-adipiscing-elit-sed-d', '20000.00', '4', '', '', 'img/book1.png', 'anh3.png', '26149', null, 'uia non ', '234', '8', '5', null, '1', 'vi', '2016-09-20 10:57:20', '2016-09-20 10:57:20', null, '0000000001');
-INSERT INTO `books` VALUES ('47', '43', '<p>t aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem</p>\r\n', 'minima', '', '0', 'dolor-sit-amet-consectetur-adipisci-vel', '20000.00', '13', '', '', 'img/book1.png', 'anh2.png', '43446', null, 'minima ', '123', '9', '7', null, '1', 'vi', '2016-09-20 11:08:04', '2016-09-20 11:08:05', null, '0000000001');
-INSERT INTO `books` VALUES ('48', '44', '<p>quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, ad</p>\r\n', 'hich t', '', '0', 'teachings-of-the-great-explorer-of-the-truth', '20000.00', '11', '', '', 'img/book1.png', 'anuong.png', '50899', null, '445', '233', '8', '8', null, '1', 'vi', '2016-09-20 11:08:53', '2016-09-20 11:08:53', null, '0000000001');
-INSERT INTO `books` VALUES ('49', '45', '<p>id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut</p>\r\n', 'libero ', '', '0', 'distinctio-nam-libero-tempore', '33000.00', '14', '', '', 'img/book1.png', 'cacsukien.png', '54852', null, '3345', '233', '10', '9', null, '1', 'vi', '2016-09-20 11:09:54', '2016-09-20 11:09:54', null, '0000000001');
-INSERT INTO `books` VALUES ('50', '46', '<p>&nbsp;facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat face</p>\r\n', '343565', '', '0', 'sire-that-they-cannot-foresee-th', '22000.00', '4', '', '', 'img/book1.png', 'anh1.png', '56909', null, '3436565', '234', '8', '6', null, '1', 'vi', '2016-09-20 11:10:42', '2016-09-20 11:10:43', null, '0000000001');
-INSERT INTO `books` VALUES ('51', '47', '<p>tis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectu</p>\r\n', 'ucimus qui bland', '', '0', 'ucimus-qui-bland', '20000.00', '13', '', '', 'img/book1.png', 'anh2.png', '43446', null, '3232', '343', '8', '9', null, '1', 'vi', '2016-09-20 11:11:27', '2016-09-20 11:11:27', null, '0000000001');
-INSERT INTO `books` VALUES ('52', '48', '<p>at facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus sa</p>\r\n', '3246665', '', '0', 'ot-foresee-the-pain-and-trouble-that', '22000.00', '11', '', '', 'img/book1.png', 'giamdoc.png', '31930', null, '2332', '323', '9', '7', null, '1', 'vi', '2016-09-20 11:14:50', '2016-09-20 11:14:50', null, '0000000001');
-INSERT INTO `books` VALUES ('53', '49', '<p>&nbsp;hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.&quot;</p>\r\n', 'blanditiis ', '', '0', 'issimos-ducimus-qui-blanditiis-praes', '20000.00', '14', '', '', 'img/book1.png', 'dulich-giaitri.png', '47206', null, '2323', '234', '7', '8', null, '1', 'vi', '2016-09-20 11:15:39', '2016-09-20 11:15:39', null, '0000000001');
-INSERT INTO `books` VALUES ('54', '50', '<p>on provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et</p>\r\n', 'similique ', '', '0', 'on-provident-similique-sunt', '22000.00', '12', '', '', 'img/book1.png', 'muasam.png', '55043', null, '3255', '234', '10', '8', null, '1', 'vi', '2016-09-20 11:16:30', '2016-09-20 11:16:31', null, '0000000001');
-INSERT INTO `books` VALUES ('55', '51', '<p>rough weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is</p>\r\n', '434', '', '0', 'kness-of-will-which-is-the', '33000.00', '14', '', '', 'img/book1.png', 'hethongchinhanh.png', '70559', null, '3232', '234', '7', '10', null, '1', 'vi', '2016-09-20 11:17:25', '2016-09-20 11:17:25', null, '0000000001');
-INSERT INTO `books` VALUES ('56', '52', '<p>&nbsp;est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, om</p>\r\n', 'Nam ', '', '0', 'est-et-expedita-distinctio-nam-libero', '33000.00', '4', '', '', 'img/book1.png', 'maybay1.png', '104813', null, '2323', '234', '6', '8', null, '1', 'vi', '2016-09-20 11:18:24', '2016-09-20 11:18:24', null, '0000000001');
-INSERT INTO `books` VALUES ('57', '53', '<p>ness of will, which is the same as sayi</p>\r\n', '3434', '', '0', 'ness-of-will-which-is-the-same-as-sayi', '24000.00', '4', '', '', 'img/book1.png', 'suckhoe-lamdep.png', '30318', null, '243', '234', '8', '7', null, '1', 'vi', '2016-09-20 11:19:38', '2016-09-20 11:19:39', null, '0000000001');
-INSERT INTO `books` VALUES ('58', '54', '<p>issimos ducimus qui blanditiis praesentium</p>\r\n', '2345676', '', '0', 'tinh-yeu-tren-song-quan-ho', '34400.00', '14', '', '', 'img/book1.png', 'maybay2.png', '115959', null, '2323', '324', '9', '8', null, '1', 'vi', '2016-09-20 11:20:56', '2016-10-03 17:56:28', null, '0000000001');
-INSERT INTO `books` VALUES ('59', '55', '<p>gsdfgsdfg</p>\r\n', 'asdfasdf', '', '10', 'con-song-tuoi-tho', '20000.00', '4', '', '', null, null, null, null, '1', '300', '6', '3', null, '1', 'vi', '2016-09-20 14:29:42', '2016-10-03 17:49:01', null, '0000000001');
-INSERT INTO `books` VALUES ('60', '56', '<p>fasdfasd</p>\r\n', 'asdfasdf', '', '10', 'chao-song-ma', '20000.00', '13', '', '', null, null, null, null, '1', '300', '6', '8', null, '1', 'vi', '2016-09-20 14:32:46', '2016-10-03 17:48:36', null, '0000000001');
-INSERT INTO `books` VALUES ('61', '57', '<p>sdgsdfg</p>\r\n', 'asdfasdf', '', '10', 'xin-chao-ba-con', '20000.00', '4', '', '', null, null, null, null, '1', '300', '6', '8', null, '1', 'vi', '2016-09-20 14:33:09', '2016-10-03 17:48:01', null, '0000000001');
-INSERT INTO `books` VALUES ('62', '58', '<p>love</p>\r\n', 'love1212', '', '0', 'when-i-see-your-smile', '0.00', '4', '', '', null, null, null, null, '', '', null, null, null, '1', 'vi', '2016-10-06 15:59:28', '2016-10-06 15:59:29', null, '0000000001');
-INSERT INTO `books` VALUES ('63', '59', '<p>love</p>\r\n', 'love1212', '', '0', 'when-i-see-your-smile-1', '0.00', '4', '', '', null, null, null, null, '', '', '6', '3', null, '1', 'vi', '2016-10-06 16:00:28', '2016-10-06 16:00:28', null, '0000000001');
-INSERT INTO `books` VALUES ('64', '60', '<p>hello</p>\r\n', 'link top', '', '0', 'top-link', '0.00', '4', '', '', null, null, null, null, '', '', '6', '3', null, '1', 'vi', '2016-10-06 16:03:06', '2016-10-06 16:03:06', null, '0000000001');
-INSERT INTO `books` VALUES ('65', '61', '<p>sds ds ds</p>\r\n', '232 232', '', '0', 'live-by-food', '0.00', '4', '', '', null, null, null, null, '', '', '6', '3', null, '1', 'vi', '2016-10-06 16:03:38', '2016-10-06 16:05:20', null, '0000000001');
-INSERT INTO `books` VALUES ('66', '62', '<p>22</p>\r\n', 'tlrrtl', '', '0', 'look-around-the-conrner', '0.00', '0', '', '', null, null, null, null, '', '', null, null, null, '0', 'vi', '2016-10-06 16:09:05', '2016-10-06 16:09:05', null, '0000000001');
-INSERT INTO `books` VALUES ('67', '63', '<p>sds ds d</p>\r\n', '33 ', '', '0', 'loi-cua-gio', '0.00', '4', '', '', null, null, null, null, '', '', '6', '3', null, '0', 'vi', '2016-10-06 16:10:16', '2016-10-06 16:10:21', null, '0000000001');
-INSERT INTO `books` VALUES ('68', '64', '<p>sdss</p>\r\n', '2334343', '', '0', 'toi-thay-con-bo', '13000.00', '4', '', '', '/uploads/book//anh520161011031507.png', 'anh520161011031507.png', '81636', null, '', '', '6', '3', null, '1', 'vi', '2016-10-10 16:14:21', '2016-10-11 15:15:09', null, '0000000001');
-INSERT INTO `books` VALUES ('69', '65', '<p>sds dsds</p>\r\n', '2344', '', '33', 'test-me-awile', '0.00', '4', '', '', '/uploads/book//anh320161011030531.png', 'anh320161011030531.png', '26149', null, '', '', '6', '3', null, '1', 'vi', '2016-10-11 15:05:32', '2016-10-11 15:05:32', null, '0000000001');
-INSERT INTO `books` VALUES ('70', '66', '<p>sds dsds</p>\r\n', '2344', '', '33', 'test-me-awile-1', '0.00', '4', '', '', '/uploads/book//anh20161011030720.png', 'anh20161011030720.png', '81041', null, '', '', '6', '3', null, '1', 'vi', '2016-10-11 15:07:22', '2016-10-11 15:07:23', null, '0000000001');
+INSERT INTO `books` VALUES ('40', '36', '<p>older</p>\r\n', null, '', '1', 'wake-me-up', '4', '', '', null, null, null, null, null, null, '6', '3', null, '1', 'vi', '2016-09-18 09:46:57', '2016-09-18 09:47:44', '0000-00-00 00:00:00', '0000000001');
+INSERT INTO `books` VALUES ('41', '37', '<p>run test</p>\r\n', 'isb', '', '12', 'noway-to-run-test', '5', '', '', 'img/book1.png', 'mypham1.png', '4467', null, '233', '23', '7', '5', null, '1', 'vi', '2016-09-18 09:50:46', '2016-09-20 08:34:34', null, '0000000001');
+INSERT INTO `books` VALUES ('42', '38', '<p>time</p>\r\n', '', '', '2', 'we-need-to', '4', '', '', 'img/book1.png', 'tuong.png', '35447', null, '', '', '6', '3', null, '1', 'vi', '2016-09-18 10:51:20', '2016-09-20 08:34:17', null, '0000000001');
+INSERT INTO `books` VALUES ('43', '39', '<p>so serious</p>\r\n', 'us unite', '', '33', 'when-music-make', '4', '', '', 'img/book1.png', 'anh1.png', '267629', null, '43', '', '6', '3', null, '1', 'vi', '2016-09-18 10:55:15', '2016-09-20 08:34:02', null, '0000000001');
+INSERT INTO `books` VALUES ('44', '40', '<p>dfd</p>\r\n', 'have', '', '2', 'event', '4', '', '', 'img/book1.png', 'cay.png', '46856', null, '938', '', '6', '3', null, '1', 'vi', '2016-09-18 10:57:35', '2016-09-20 08:33:32', null, '0000000001');
+INSERT INTO `books` VALUES ('45', '41', '<p>sds</p>\r\n', 'tag', '', '33', 'price', '4', '', '', 'img/book1.png', 'cocin.png', '26866', null, 'jess', 'jfk', '6', '3', null, '1', 'vi', '2016-09-18 11:00:20', '2016-09-20 08:32:51', null, '0000000001');
+INSERT INTO `books` VALUES ('46', '42', '<p>is iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla par</p>\r\n', ' commod', '', '0', 'amet-consectetur-adipiscing-elit-sed-d', '4', '', '', 'img/book1.png', 'anh3.png', '26149', null, 'uia non ', '234', '8', '5', null, '1', 'vi', '2016-09-20 10:57:20', '2016-09-20 10:57:20', null, '0000000001');
+INSERT INTO `books` VALUES ('47', '43', '<p>t aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem</p>\r\n', 'minima', '', '0', 'dolor-sit-amet-consectetur-adipisci-vel', '13', '', '', 'img/book1.png', 'anh2.png', '43446', null, 'minima ', '123', '9', '7', null, '1', 'vi', '2016-09-20 11:08:04', '2016-09-20 11:08:05', null, '0000000001');
+INSERT INTO `books` VALUES ('48', '44', '<p>quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, ad</p>\r\n', 'hich t', '', '0', 'teachings-of-the-great-explorer-of-the-truth', '11', '', '', 'img/book1.png', 'anuong.png', '50899', null, '445', '233', '8', '8', null, '1', 'vi', '2016-09-20 11:08:53', '2016-09-20 11:08:53', null, '0000000001');
+INSERT INTO `books` VALUES ('49', '45', '<p>id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut</p>\r\n', 'libero ', '', '0', 'distinctio-nam-libero-tempore', '14', '', '', 'img/book1.png', 'cacsukien.png', '54852', null, '3345', '233', '10', '9', null, '1', 'vi', '2016-09-20 11:09:54', '2016-09-20 11:09:54', null, '0000000001');
+INSERT INTO `books` VALUES ('50', '46', '<p>&nbsp;facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat face</p>\r\n', '343565', '', '0', 'sire-that-they-cannot-foresee-th', '4', '', '', 'img/book1.png', 'anh1.png', '56909', null, '3436565', '234', '8', '6', null, '1', 'vi', '2016-09-20 11:10:42', '2016-09-20 11:10:43', null, '0000000001');
+INSERT INTO `books` VALUES ('51', '47', '<p>tis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectu</p>\r\n', 'ucimus qui bland', '', '0', 'ucimus-qui-bland', '13', '', '', 'img/book1.png', 'anh2.png', '43446', null, '3232', '343', '8', '9', null, '1', 'vi', '2016-09-20 11:11:27', '2016-09-20 11:11:27', null, '0000000001');
+INSERT INTO `books` VALUES ('52', '48', '<p>at facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus sa</p>\r\n', '3246665', '', '0', 'ot-foresee-the-pain-and-trouble-that', '11', '', '', 'img/book1.png', 'giamdoc.png', '31930', null, '2332', '323', '9', '7', null, '1', 'vi', '2016-09-20 11:14:50', '2016-09-20 11:14:50', null, '0000000001');
+INSERT INTO `books` VALUES ('53', '49', '<p>&nbsp;hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.&quot;</p>\r\n', 'blanditiis ', '', '0', 'issimos-ducimus-qui-blanditiis-praes', '14', '', '', 'img/book1.png', 'dulich-giaitri.png', '47206', null, '2323', '234', '7', '8', null, '1', 'vi', '2016-09-20 11:15:39', '2016-09-20 11:15:39', null, '0000000001');
+INSERT INTO `books` VALUES ('54', '50', '<p>on provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et</p>\r\n', 'similique ', '', '0', 'on-provident-similique-sunt', '12', '', '', 'img/book1.png', 'muasam.png', '55043', null, '3255', '234', '10', '8', null, '1', 'vi', '2016-09-20 11:16:30', '2016-09-20 11:16:31', null, '0000000001');
+INSERT INTO `books` VALUES ('55', '51', '<p>rough weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is</p>\r\n', '434', '', '0', 'kness-of-will-which-is-the', '14', '', '', 'img/book1.png', 'hethongchinhanh.png', '70559', null, '3232', '234', '7', '10', null, '1', 'vi', '2016-09-20 11:17:25', '2016-09-20 11:17:25', null, '0000000001');
+INSERT INTO `books` VALUES ('56', '52', '<p>&nbsp;est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, om</p>\r\n', 'Nam ', '', '0', 'est-et-expedita-distinctio-nam-libero', '4', '', '', 'img/book1.png', 'maybay1.png', '104813', null, '2323', '234', '6', '8', null, '1', 'vi', '2016-09-20 11:18:24', '2016-09-20 11:18:24', null, '0000000001');
+INSERT INTO `books` VALUES ('57', '53', '<p>ness of will, which is the same as sayi</p>\r\n', '3434', '', '0', 'ness-of-will-which-is-the-same-as-sayi', '4', '', '', 'img/book1.png', 'suckhoe-lamdep.png', '30318', null, '243', '234', '8', '7', null, '1', 'vi', '2016-09-20 11:19:38', '2016-09-20 11:19:39', null, '0000000001');
+INSERT INTO `books` VALUES ('58', '54', '<p>issimos ducimus qui blanditiis praesentium</p>\r\n', '2345676', '', '0', 'tinh-yeu-tren-song-quan-ho', '14', '', '', 'img/book1.png', 'maybay2.png', '115959', null, '2323', '324', '9', '8', null, '1', 'vi', '2016-09-20 11:20:56', '2016-10-03 17:56:28', null, '0000000001');
+INSERT INTO `books` VALUES ('59', '55', '<p>gsdfgsdfg</p>\r\n', 'asdfasdf', '', '10', 'con-song-tuoi-tho', '4', '', '', null, null, null, null, '1', '300', '6', '3', null, '1', 'vi', '2016-09-20 14:29:42', '2016-10-03 17:49:01', null, '0000000001');
+INSERT INTO `books` VALUES ('60', '56', '<p>fasdfasd</p>\r\n', 'asdfasdf', '', '10', 'chao-song-ma', '13', '', '', null, null, null, null, '1', '300', '6', '8', null, '1', 'vi', '2016-09-20 14:32:46', '2016-10-03 17:48:36', null, '0000000001');
+INSERT INTO `books` VALUES ('61', '57', '<p>sdgsdfg</p>\r\n', 'asdfasdf', '', '10', 'xin-chao-ba-con', '4', '', '', null, null, null, null, '1', '300', '6', '8', null, '1', 'vi', '2016-09-20 14:33:09', '2016-10-03 17:48:01', null, '0000000001');
+INSERT INTO `books` VALUES ('62', '58', '<p>love</p>\r\n', 'love1212', '', '0', 'when-i-see-your-smile', '4', '', '', null, null, null, null, '', '', null, null, null, '1', 'vi', '2016-10-06 15:59:28', '2016-10-06 15:59:29', null, '0000000001');
+INSERT INTO `books` VALUES ('63', '59', '<p>love</p>\r\n', 'love1212', '', '0', 'when-i-see-your-smile-1', '4', '', '', null, null, null, null, '', '', '6', '3', null, '1', 'vi', '2016-10-06 16:00:28', '2016-10-06 16:00:28', null, '0000000001');
+INSERT INTO `books` VALUES ('64', '60', '<p>hello</p>\r\n', 'link top', '', '0', 'top-link', '4', '', '', null, null, null, null, '', '', '6', '3', null, '1', 'vi', '2016-10-06 16:03:06', '2016-10-06 16:03:06', null, '0000000001');
+INSERT INTO `books` VALUES ('65', '61', '<p>sds ds ds</p>\r\n', '232 232', '', '0', 'live-by-food', '4', '', '', null, null, null, null, '', '', '6', '3', null, '1', 'vi', '2016-10-06 16:03:38', '2016-10-06 16:05:20', null, '0000000001');
+INSERT INTO `books` VALUES ('66', '62', '<p>22</p>\r\n', 'tlrrtl', '', '0', 'look-around-the-conrner', '0', '', '', null, null, null, null, '', '', null, null, null, '0', 'vi', '2016-10-06 16:09:05', '2016-10-06 16:09:05', null, '0000000001');
+INSERT INTO `books` VALUES ('67', '63', '<p>sds ds d</p>\r\n', '33 ', '', '0', 'loi-cua-gio', '4', '', '', null, null, null, null, '', '', '6', '3', null, '0', 'vi', '2016-10-06 16:10:16', '2016-10-06 16:10:21', null, '0000000001');
+INSERT INTO `books` VALUES ('68', '64', '<p>sdss</p>\r\n', '2334343', '', '0', 'toi-thay-con-bo', '4', '', '', '/uploads/book//anh520161011031507.png', 'anh520161011031507.png', '81636', null, '', '', '6', '3', null, '1', 'vi', '2016-10-10 16:14:21', '2016-10-11 15:15:09', null, '0000000001');
+INSERT INTO `books` VALUES ('69', '65', '<p>sds dsds</p>\r\n', '2344', '', '33', 'test-me-awile', '4', '', '', '/uploads/book//anh320161011030531.png', 'anh320161011030531.png', '26149', null, '', '', '6', '3', null, '1', 'vi', '2016-10-11 15:05:32', '2016-10-11 15:05:32', null, '0000000001');
+INSERT INTO `books` VALUES ('70', '66', '<p>sds dsds</p>\r\n', '2344', '', '33', 'test-me-awile-1', '4', '', '', '/uploads/book//anh20161011030720.png', 'anh20161011030720.png', '81041', null, '', '', '6', '3', null, '1', 'vi', '2016-10-11 15:07:22', '2016-10-11 15:07:23', null, '0000000001');
 
 -- ----------------------------
 -- Table structure for books_authors
@@ -272,6 +292,54 @@ CREATE TABLE `book_rates` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for carts
+-- ----------------------------
+DROP TABLE IF EXISTS `carts`;
+CREATE TABLE `carts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `app_session` varchar(100) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `total` decimal(10,0) DEFAULT NULL,
+  `description` varchar(100) DEFAULT NULL,
+  `expired_date` date DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `shipping_address_id` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of carts
+-- ----------------------------
+INSERT INTO `carts` VALUES ('21', '$2y$10$H/eqTSm2BVN7lqcRxnuhx.fIjsfnMN6hxTdo/ujLgPUVlIwL/j0I6', null, 'INIT', null, null, null, '2016-10-19 21:31:01', '2016-10-19 21:31:01', null);
+INSERT INTO `carts` VALUES ('24', '$2y$10$Qv\\/srDCU5A2TU3i.8nNuq.f5uz\\/ZgOy9bXC7f42.LhAv2I0A952DS', '1', 'INIT', null, null, null, '2016-10-20 17:09:07', '2016-10-20 22:11:53', '1');
+
+-- ----------------------------
+-- Table structure for cart_items
+-- ----------------------------
+DROP TABLE IF EXISTS `cart_items`;
+CREATE TABLE `cart_items` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cart_id` int(11) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `product_name` varchar(255) DEFAULT NULL,
+  `quantity` int(3) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+-- ----------------------------
+-- Records of cart_items
+-- ----------------------------
+INSERT INTO `cart_items` VALUES ('32', '21', '38', 'we need to', '1', '2016-10-19 21:31:01', '2016-10-19 21:31:01');
+INSERT INTO `cart_items` VALUES ('33', '21', '39', 'when music make', '1', '2016-10-19 21:31:18', '2016-10-19 21:31:18');
+INSERT INTO `cart_items` VALUES ('41', '24', '39', 'when music make', '1', '2016-10-20 17:09:07', '2016-10-20 17:09:07');
+INSERT INTO `cart_items` VALUES ('42', '24', '40', 'event', '1', '2016-10-20 17:09:20', '2016-10-20 17:09:20');
+INSERT INTO `cart_items` VALUES ('43', '24', '41', 'price', '1', '2016-10-20 17:09:24', '2016-10-20 17:09:24');
+
+-- ----------------------------
 -- Table structure for categories
 -- ----------------------------
 DROP TABLE IF EXISTS `categories`;
@@ -312,46 +380,48 @@ CREATE TABLE `entity` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_by` int(11) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
+  `rent_price` decimal(10,2) DEFAULT NULL,
   `price` decimal(10,2) DEFAULT NULL,
   `currency_unit` varchar(20) DEFAULT NULL,
   `lang` varchar(5) DEFAULT NULL,
+  `type` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of entity
 -- ----------------------------
-INSERT INTO `entity` VALUES ('36', '2016-09-18 09:46:56', '2016-09-18 09:47:44', '2016-09-18 09:47:44', '1', 'wake me up', '11.00', null, 'vi');
-INSERT INTO `entity` VALUES ('37', '2016-09-18 09:50:45', '2016-09-18 10:44:31', null, '1', 'noway to run test', '112.00', null, 'vi');
-INSERT INTO `entity` VALUES ('38', '2016-09-18 10:51:20', '2016-09-18 10:51:20', null, '1', 'we need to', '12.00', null, 'vi');
-INSERT INTO `entity` VALUES ('39', '2016-09-18 10:55:15', '2016-09-18 10:55:15', null, '1', 'when music make', '23.00', null, 'vi');
-INSERT INTO `entity` VALUES ('40', '2016-09-18 10:57:35', '2016-09-18 10:57:35', null, '1', 'event', '34.00', null, 'vi');
-INSERT INTO `entity` VALUES ('41', '2016-09-18 11:00:20', '2016-09-18 11:00:20', null, '1', 'price', '22.00', null, 'vi');
-INSERT INTO `entity` VALUES ('42', '2016-09-20 10:57:20', '2016-09-20 10:57:20', null, '1', ' amet, consectetur adipiscing elit, sed d', '200000.00', null, 'vi');
-INSERT INTO `entity` VALUES ('43', '2016-09-20 11:08:04', '2016-09-20 11:08:04', null, '1', ' dolor sit amet, consectetur, adipisci vel', '200000.00', null, 'vi');
-INSERT INTO `entity` VALUES ('44', '2016-09-20 11:08:53', '2016-09-20 11:08:53', null, '1', 'teachings of the great explorer of the truth', '200000.00', null, 'vi');
-INSERT INTO `entity` VALUES ('45', '2016-09-20 11:09:53', '2016-09-20 11:09:53', null, '1', 'distinctio. Nam libero tempore,', '2450000.00', null, 'vi');
-INSERT INTO `entity` VALUES ('46', '2016-09-20 11:10:42', '2016-09-20 11:10:42', null, '1', 'sire, that they cannot foresee th', '124000.00', null, 'vi');
-INSERT INTO `entity` VALUES ('47', '2016-09-20 11:11:27', '2016-09-20 11:11:27', null, '1', 'ucimus qui bland', '200000.00', null, 'vi');
-INSERT INTO `entity` VALUES ('48', '2016-09-20 11:14:50', '2016-09-20 11:14:50', null, '1', 'ot foresee the pain and trouble that ', '346000.00', null, 'vi');
-INSERT INTO `entity` VALUES ('49', '2016-09-20 11:15:39', '2016-09-20 11:15:39', null, '1', 'issimos ducimus qui blanditiis praes', '356000.00', null, 'vi');
-INSERT INTO `entity` VALUES ('50', '2016-09-20 11:16:29', '2016-09-20 11:16:29', null, '1', 'on provident, similique sunt ', '346000.00', null, 'vi');
-INSERT INTO `entity` VALUES ('51', '2016-09-20 11:17:25', '2016-09-20 11:17:25', null, '1', 'kness of will, which is the ', '238000.00', null, 'vi');
-INSERT INTO `entity` VALUES ('52', '2016-09-20 11:18:24', '2016-09-20 11:18:24', null, '1', ' est et expedita distinctio. Nam libero', '346000.00', null, 'vi');
-INSERT INTO `entity` VALUES ('53', '2016-09-20 11:19:38', '2016-09-20 11:19:38', null, '1', 'ness of will, which is the same as sayi', '124000.00', null, 'vi');
-INSERT INTO `entity` VALUES ('54', '2016-09-20 11:20:56', '2016-10-03 17:56:28', null, '1', 'tinh yeu tren song quan ho', '2450000.00', null, 'vi');
-INSERT INTO `entity` VALUES ('55', '2016-09-20 14:29:41', '2016-10-03 17:48:58', null, '1', 'con song tuoi tho', '200000.00', null, 'vi');
-INSERT INTO `entity` VALUES ('56', '2016-09-20 14:32:46', '2016-10-03 17:48:35', null, '1', 'chao song ma', '200000.00', null, 'vi');
-INSERT INTO `entity` VALUES ('57', '2016-09-20 14:33:08', '2016-10-03 17:35:45', null, '1', 'xin chao ba con', '200000.00', null, 'vi');
-INSERT INTO `entity` VALUES ('58', '2016-10-06 15:59:28', '2016-10-06 15:59:28', null, '1', 'when i see your smile', '112.00', null, 'vi');
-INSERT INTO `entity` VALUES ('59', '2016-10-06 16:00:28', '2016-10-06 16:00:28', null, '1', 'when i see your smile', '112.00', null, 'vi');
-INSERT INTO `entity` VALUES ('60', '2016-10-06 16:03:06', '2016-10-06 16:03:06', null, '1', 'top link', '33.00', null, 'vi');
-INSERT INTO `entity` VALUES ('61', '2016-10-06 16:03:38', '2016-10-06 16:03:38', null, '1', 'live by food', '22.00', null, 'vi');
-INSERT INTO `entity` VALUES ('62', '2016-10-06 16:09:05', '2016-10-06 16:09:05', null, '1', 'look around the conrner', '333.00', null, 'vi');
-INSERT INTO `entity` VALUES ('63', '2016-10-06 16:10:16', '2016-10-06 16:10:16', null, '1', 'loi cua gio', '33.00', null, 'vi');
-INSERT INTO `entity` VALUES ('64', '2016-10-10 16:14:21', '2016-10-10 16:14:21', null, '1', 'toi thay con bo', '230000.00', null, 'vi');
-INSERT INTO `entity` VALUES ('65', '2016-10-11 15:05:32', '2016-10-11 15:05:32', null, '1', 'test me awile', '232.00', null, 'vi');
-INSERT INTO `entity` VALUES ('66', '2016-10-11 15:07:22', '2016-10-11 15:07:22', null, '1', 'test me awile', '232.00', null, 'vi');
+INSERT INTO `entity` VALUES ('36', '2016-09-18 09:46:56', '2016-10-20 17:21:27', '2016-09-18 09:47:44', '1', 'wake me up', '10.00', '11.00', null, 'vi', 'BOOK');
+INSERT INTO `entity` VALUES ('37', '2016-09-18 09:50:45', '2016-10-20 17:21:27', null, '1', 'noway to run test', '10.00', '112.00', null, 'vi', 'BOOK');
+INSERT INTO `entity` VALUES ('38', '2016-09-18 10:51:20', '2016-10-20 17:21:27', null, '1', 'we need to', '10.00', '12.00', null, 'vi', 'BOOK');
+INSERT INTO `entity` VALUES ('39', '2016-09-18 10:55:15', '2016-10-20 17:21:27', null, '1', 'when music make', '10.00', '23.00', null, 'vi', 'BOOK');
+INSERT INTO `entity` VALUES ('40', '2016-09-18 10:57:35', '2016-10-20 17:21:27', null, '1', 'event', '10.00', '34.00', null, 'vi', 'BOOK');
+INSERT INTO `entity` VALUES ('41', '2016-09-18 11:00:20', '2016-10-20 17:21:27', null, '1', 'price', '10.00', '22.00', null, 'vi', 'BOOK');
+INSERT INTO `entity` VALUES ('42', '2016-09-20 10:57:20', '2016-10-20 17:21:27', null, '1', ' amet, consectetur adipiscing elit, sed d', '10.00', '200000.00', null, 'vi', 'BOOK');
+INSERT INTO `entity` VALUES ('43', '2016-09-20 11:08:04', '2016-10-20 17:21:27', null, '1', ' dolor sit amet, consectetur, adipisci vel', '10.00', '200000.00', null, 'vi', 'BOOK');
+INSERT INTO `entity` VALUES ('44', '2016-09-20 11:08:53', '2016-10-20 17:21:27', null, '1', 'teachings of the great explorer of the truth', '10.00', '200000.00', null, 'vi', 'BOOK');
+INSERT INTO `entity` VALUES ('45', '2016-09-20 11:09:53', '2016-10-20 17:21:27', null, '1', 'distinctio. Nam libero tempore,', '10.00', '2450000.00', null, 'vi', 'BOOK');
+INSERT INTO `entity` VALUES ('46', '2016-09-20 11:10:42', '2016-10-20 17:21:27', null, '1', 'sire, that they cannot foresee th', '10.00', '124000.00', null, 'vi', 'BOOK');
+INSERT INTO `entity` VALUES ('47', '2016-09-20 11:11:27', '2016-10-20 17:21:27', null, '1', 'ucimus qui bland', '10.00', '200000.00', null, 'vi', 'BOOK');
+INSERT INTO `entity` VALUES ('48', '2016-09-20 11:14:50', '2016-10-20 17:21:27', null, '1', 'ot foresee the pain and trouble that ', '10.00', '346000.00', null, 'vi', 'BOOK');
+INSERT INTO `entity` VALUES ('49', '2016-09-20 11:15:39', '2016-10-20 17:21:27', null, '1', 'issimos ducimus qui blanditiis praes', '10.00', '356000.00', null, 'vi', 'BOOK');
+INSERT INTO `entity` VALUES ('50', '2016-09-20 11:16:29', '2016-10-20 17:21:27', null, '1', 'on provident, similique sunt ', '10.00', '346000.00', null, 'vi', 'BOOK');
+INSERT INTO `entity` VALUES ('51', '2016-09-20 11:17:25', '2016-10-20 17:21:27', null, '1', 'kness of will, which is the ', '10.00', '238000.00', null, 'vi', 'BOOK');
+INSERT INTO `entity` VALUES ('52', '2016-09-20 11:18:24', '2016-10-20 17:21:27', null, '1', ' est et expedita distinctio. Nam libero', '10.00', '346000.00', null, 'vi', 'BOOK');
+INSERT INTO `entity` VALUES ('53', '2016-09-20 11:19:38', '2016-10-20 17:21:27', null, '1', 'ness of will, which is the same as sayi', '10.00', '124000.00', null, 'vi', 'BOOK');
+INSERT INTO `entity` VALUES ('54', '2016-09-20 11:20:56', '2016-10-20 17:21:27', null, '1', 'tinh yeu tren song quan ho', '10.00', '2450000.00', null, 'vi', 'BOOK');
+INSERT INTO `entity` VALUES ('55', '2016-09-20 14:29:41', '2016-10-20 17:21:27', null, '1', 'con song tuoi tho', '10.00', '200000.00', null, 'vi', 'BOOK');
+INSERT INTO `entity` VALUES ('56', '2016-09-20 14:32:46', '2016-10-20 17:21:27', null, '1', 'chao song ma', '10.00', '200000.00', null, 'vi', 'BOOK');
+INSERT INTO `entity` VALUES ('57', '2016-09-20 14:33:08', '2016-10-20 17:21:27', null, '1', 'xin chao ba con', '10.00', '200000.00', null, 'vi', 'BOOK');
+INSERT INTO `entity` VALUES ('58', '2016-10-06 15:59:28', '2016-10-20 17:21:27', null, '1', 'when i see your smile', '10.00', '112.00', null, 'vi', 'BOOK');
+INSERT INTO `entity` VALUES ('59', '2016-10-06 16:00:28', '2016-10-20 17:21:27', null, '1', 'when i see your smile', '10.00', '112.00', null, 'vi', 'BOOK');
+INSERT INTO `entity` VALUES ('60', '2016-10-06 16:03:06', '2016-10-20 17:21:27', null, '1', 'top link', '10.00', '33.00', null, 'vi', 'BOOK');
+INSERT INTO `entity` VALUES ('61', '2016-10-06 16:03:38', '2016-10-20 17:21:27', null, '1', 'live by food', '10.00', '22.00', null, 'vi', 'BOOK');
+INSERT INTO `entity` VALUES ('62', '2016-10-06 16:09:05', '2016-10-20 17:21:27', null, '1', 'look around the conrner', '10.00', '333.00', null, 'vi', 'BOOK');
+INSERT INTO `entity` VALUES ('63', '2016-10-06 16:10:16', '2016-10-20 17:21:27', null, '1', 'loi cua gio', '10.00', '33.00', null, 'vi', 'BOOK');
+INSERT INTO `entity` VALUES ('64', '2016-10-10 16:14:21', '2016-10-20 17:21:27', null, '1', 'toi thay con bo', '10.00', '230000.00', null, 'vi', 'BOOK');
+INSERT INTO `entity` VALUES ('65', '2016-10-11 15:05:32', '2016-10-20 17:21:27', null, '1', 'test me awile', '10.00', '232.00', null, 'vi', 'BOOK');
+INSERT INTO `entity` VALUES ('66', '2016-10-11 15:07:22', '2016-10-20 17:21:27', null, '1', 'test me awile', '10.00', '232.00', null, 'vi', 'BOOK');
 
 -- ----------------------------
 -- Table structure for entity_categories
@@ -479,6 +549,26 @@ CREATE TABLE `form_posts` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for invites
+-- ----------------------------
+DROP TABLE IF EXISTS `invites`;
+CREATE TABLE `invites` (
+  `id` int(11) NOT NULL,
+  `host_id` int(10) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `invite_url` varchar(255) DEFAULT NULL,
+  `status` varchar(25) DEFAULT NULL,
+  `guest_id` int(10) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of invites
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for logs
 -- ----------------------------
 DROP TABLE IF EXISTS `logs`;
@@ -576,11 +666,13 @@ CREATE TABLE `merchant_transactions` (
   `trans_status` varchar(50) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of merchant_transactions
 -- ----------------------------
+INSERT INTO `merchant_transactions` VALUES ('1', '1pay', '1', '100000', '2', 'Nạp 100.000 đ vào tài khoản', 'init', null, null, null, null, null, null, null, null, '9da1a564242b4972bfb9bf0e5f242d32', null, '2016-10-12 21:48:08');
+INSERT INTO `merchant_transactions` VALUES ('2', '1pay', '1', '100000', '3', 'Nạp 100.000 đ vào tài khoản', 'SUCCESS', '100000', 'Tp bank', 'TpB', 'ND', '2016-10-12 02:42:17', '00', 'ok', '2016-10-12 02:48:28', 'd4ce97bc92a34d5ea53fcc206ef95349', 'finish', '2016-10-12 23:50:42');
 
 -- ----------------------------
 -- Table structure for migrations
@@ -655,6 +747,57 @@ INSERT INTO `news` VALUES ('16', 'Maecenas dictum nulla turpis', 'Quisque eleife
 INSERT INTO `news` VALUES ('17', 'In ultricies in tortor sed pellentesque', 'Cras ac libero in ipsum rutrum placerat tincidunt nec turpis. Fusce rhoncus turpis at sem eleifend aliquam. Curabitur fringilla, ipsum in scelerisque laoreet, est ligula sagittis enim, vitae adipiscing dolor nisi ut dolor. Donec at risus imperdiet nisi blandit volutpat. In ultricies in tortor sed pellentesque. Phasellus nec elit in enim facilisis adipiscing ut eu orci. Quisque congue iaculis leo ac viverra. Pellentesque sagittis pellentesque ipsum, id blandit elit tempus eu. ', 'in-ultricies-in-tortor-sed-pellentesque', '2016-06-13', '2016-06-13 08:57:29', '2016-06-13 08:57:29', '1', null, null, null, 'tr');
 INSERT INTO `news` VALUES ('18', 'In hac habitasse platea dictumst', 'Sed quis felis aliquet, luctus erat non, congue dui. Integer imperdiet odio non lacus rhoncus fringilla. Sed at lacus sollicitudin tellus dignissim mollis vitae sed metus. Sed blandit nisi vitae risus commodo mollis. Ut metus lorem, luctus ut venenatis vitae, rutrum ut odio. Etiam viverra quis nunc sit amet vestibulum. Vestibulum fermentum mauris vel nisi rutrum faucibus. Quisque ac nibh at nunc facilisis pulvinar eu in leo. In hac habitasse platea dictumst. Nullam vulputate, sapien quis porta ultrices, erat lacus tincidunt felis, sit amet molestie leo dui a arcu. Sed convallis faucibus urna, venenatis pellentesque nibh placerat at. Aliquam et bibendum nisl. Ut ut cursus tellus. Nullam ut urna a mi accumsan ultrices. Suspendisse potenti. Aenean et bibendum augue, sed posuere mauris. ', 'in-hac-habitasse-platea-dictumst', '2016-06-13', '2016-06-13 08:57:29', '2016-06-13 08:57:29', '1', null, null, null, 'tr');
 INSERT INTO `news` VALUES ('19', 'Nullam sodales, purus quis pulvinar dapibus', 'Pellentesque commodo mollis porta. Fusce eget leo in massa elementum faucibus at et nunc. Pellentesque id metus vel ligula venenatis gravida. Nullam vitae sapien id nibh pellentesque ullamcorper vel in risus. Curabitur sed faucibus sapien. Pellentesque sodales leo in mi commodo volutpat. In tempor consectetur magna tincidunt iaculis. Nullam sodales, purus quis pulvinar dapibus, arcu tortor feugiat lectus, eu viverra est lorem aliquam eros. ', 'nullam-sodales-purus-quis-pulvinar-dapibus', '2016-06-13', '2016-06-13 08:57:29', '2016-06-13 09:06:11', '0', null, null, null, 'en');
+
+-- ----------------------------
+-- Table structure for orders
+-- ----------------------------
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `app_session` varchar(100) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `cart_id` int(11) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `total` decimal(10,0) DEFAULT NULL,
+  `pay_at` timestamp NULL DEFAULT NULL,
+  `shipping_id` int(10) DEFAULT NULL,
+  `description` varchar(100) DEFAULT NULL,
+  `expired_date` date DEFAULT NULL,
+  `finished_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `shipping_fee` decimal(10,0) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of orders
+-- ----------------------------
+INSERT INTO `orders` VALUES ('15', '$2y$10$Qv\\/srDCU5A2TU3i.8nNuq.f5uz\\/ZgOy9bXC7f42.LhAv2I0A952DS', '1', '24', 'PAYED', null, '2016-10-20 22:22:56', '1', null, null, '2016-10-20 22:22:57', '2016-10-20 22:14:09', '2016-10-20 22:22:57', '15000');
+
+-- ----------------------------
+-- Table structure for order_items
+-- ----------------------------
+DROP TABLE IF EXISTS `order_items`;
+CREATE TABLE `order_items` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_id` int(11) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `product_name` varchar(255) DEFAULT NULL,
+  `price` decimal(10,0) DEFAULT NULL,
+  `quantity` int(3) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `rent_price` decimal(10,0) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+-- ----------------------------
+-- Records of order_items
+-- ----------------------------
+INSERT INTO `order_items` VALUES ('27', '15', '39', 'when music make', '23', '1', '2016-10-20 22:14:09', '2016-10-20 22:14:09', '10');
+INSERT INTO `order_items` VALUES ('28', '15', '40', 'event', '34', '1', '2016-10-20 22:14:09', '2016-10-20 22:14:09', '10');
+INSERT INTO `order_items` VALUES ('29', '15', '41', 'price', '22', '1', '2016-10-20 22:14:09', '2016-10-20 22:14:09', '10');
 
 -- ----------------------------
 -- Table structure for pages
@@ -1113,6 +1256,7 @@ INSERT INTO `tree_categories` VALUES ('2', 'VI_NHOM_SAN_PHAM', 'Nhom san pham', 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `permissions` text COLLATE utf8_unicode_ci,
@@ -1128,17 +1272,19 @@ CREATE TABLE `users` (
   `birthday` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1', 'letrongduong81@gmail.com', '$2y$10$032nkB8qxbraCQhUSAhW3.NXhqnExR4f5bLBKYI0GRbkAWWewdDlC', null, '2016-10-11 15:04:52', 'duong', 'le', '2016-06-13 08:57:11', '2016-10-11 15:04:52', null, null, null, null, null);
-INSERT INTO `users` VALUES ('2', 'admin@admin.com', '$2y$10$1i9siAeIJfUMijD0SRFGh.8XfUSvigvd8A1.Xdi94KF4dYiSIbZO2', null, null, 'Super', 'Admin', '2016-06-13 08:57:11', '2016-06-13 08:57:11', null, null, null, null, null);
-INSERT INTO `users` VALUES ('3', 'duong81@gmail.com', '$2y$10$tgW4UfIMkVJY2UoCvcZMmut4h6m4o7KaGre/RoORxdPJRr3pTcm4K', null, null, 'le', 'dan', '2016-06-16 10:41:37', '2016-06-16 10:41:37', null, null, null, null, null);
-INSERT INTO `users` VALUES ('4', 'ngduong81@gmail.com', '$2y$10$F/Bbf9/d3us19om5pSVkdeOUzzgukU1jamb0yn4cuBIQhb4ByCwNy', null, null, 'le', 'an', '2016-06-16 10:43:28', '2016-06-16 10:43:28', null, null, null, null, null);
-INSERT INTO `users` VALUES ('14', 'fdonuong81@gmail.com', '$2y$10$8N4giDdCjyzOM1pAp7gJ8.liOOW3/IV.GS6NwS5/5bSmiTGFuNbW6', null, '2016-06-17 07:47:50', 'laeas', 'wwsss', '2016-06-17 04:10:09', '2016-06-17 07:47:50', null, null, null, null, null);
-INSERT INTO `users` VALUES ('22', 'nguyenthihuong@gmail.com', '$2y$10$P6HGUzbfEx1Ti4WznHMYlOk39WL71wh23RZI6ejJBV/sg.k19vduS', null, null, 'led', 'duong', '2016-06-18 12:05:06', '2016-06-18 12:05:06', null, null, null, null, null);
+INSERT INTO `users` VALUES ('1', null, 'letrongduong81@gmail.com', '$2y$10$032nkB8qxbraCQhUSAhW3.NXhqnExR4f5bLBKYI0GRbkAWWewdDlC', null, '2016-10-11 15:04:52', 'duong', 'le', '2016-06-13 08:57:11', '2016-10-11 15:04:52', null, null, null, null, null);
+INSERT INTO `users` VALUES ('2', null, 'admin@admin.com', '$2y$10$1i9siAeIJfUMijD0SRFGh.8XfUSvigvd8A1.Xdi94KF4dYiSIbZO2', null, null, 'Super', 'Admin', '2016-06-13 08:57:11', '2016-06-13 08:57:11', null, null, null, null, null);
+INSERT INTO `users` VALUES ('3', null, 'duong81@gmail.com', '$2y$10$tgW4UfIMkVJY2UoCvcZMmut4h6m4o7KaGre/RoORxdPJRr3pTcm4K', null, null, 'le', 'dan', '2016-06-16 10:41:37', '2016-06-16 10:41:37', null, null, null, null, null);
+INSERT INTO `users` VALUES ('4', null, 'ngduong81@gmail.com', '$2y$10$F/Bbf9/d3us19om5pSVkdeOUzzgukU1jamb0yn4cuBIQhb4ByCwNy', null, null, 'le', 'an', '2016-06-16 10:43:28', '2016-06-16 10:43:28', null, null, null, null, null);
+INSERT INTO `users` VALUES ('14', null, 'fdonuong81@gmail.com', '$2y$10$8N4giDdCjyzOM1pAp7gJ8.liOOW3/IV.GS6NwS5/5bSmiTGFuNbW6', null, '2016-06-17 07:47:50', 'laeas', 'wwsss', '2016-06-17 04:10:09', '2016-06-17 07:47:50', null, null, null, null, null);
+INSERT INTO `users` VALUES ('22', null, 'nguyenthihuong@gmail.com', '$2y$10$P6HGUzbfEx1Ti4WznHMYlOk39WL71wh23RZI6ejJBV/sg.k19vduS', null, null, 'led', 'duong', '2016-06-18 12:05:06', '2016-06-18 12:05:06', null, null, null, null, null);
+INSERT INTO `users` VALUES ('25', 'blal sds', 'abc@ds.dd', '$2y$10$XimmcNIzklp5o3IW31SEx.5.no5ReEqlFDyQmxHaNfjTU1WBX2yu.', null, null, null, null, '2016-10-12 00:02:01', '2016-10-12 00:02:01', null, null, null, null, null);
+INSERT INTO `users` VALUES ('26', 'thank you', 'thanks@you.com', '$2y$10$TsJ88h9FKaqqKzAXGgj/bu9.wEBM1K9S/fv83qhBrFTk6gSA44pS2', null, null, null, null, '2016-10-21 11:03:51', '2016-10-21 11:03:51', null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for user_addresses
@@ -1147,19 +1293,29 @@ DROP TABLE IF EXISTS `user_addresses`;
 CREATE TABLE `user_addresses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
-  `type` int(11) DEFAULT NULL,
+  `type` varchar(20) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `province` varchar(50) DEFAULT NULL,
   `district` varchar(50) DEFAULT NULL,
   `is_main` tinyint(4) DEFAULT '0',
+  `full_name` varchar(255) NOT NULL,
+  `phone` varchar(20) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_addresses
 -- ----------------------------
+INSERT INTO `user_addresses` VALUES ('1', '1', 'home', 'so 1 abc bla', 'Ha noi', 'tu liem', '0', 'le trong duong ha', '08583758', '2016-10-20 21:36:41', '2016-10-20 21:53:39');
+INSERT INTO `user_addresses` VALUES ('2', '1', 'home', 'so 1 abc', 'Ha noi', 'tu liem', '0', 'le trong duong bla', '08583758', '2016-10-20 21:49:58', '2016-10-20 21:53:39');
+INSERT INTO `user_addresses` VALUES ('3', '1', 'home', 'so 1 abc', 'Ha noi', 'tu liem', '0', 'le trong duong', '08583758', '2016-10-20 21:52:09', '2016-10-20 21:53:39');
+INSERT INTO `user_addresses` VALUES ('4', '1', 'home', 'so 1 abc', 'Ha noi', 'tu liem', '0', 'le trong duong bla', '08583758', '2016-10-20 21:53:38', '2016-10-20 22:02:40');
+INSERT INTO `user_addresses` VALUES ('5', '1', 'home', 'so 1 abc', 'Ha noi', 'tu liem', '0', 'le trong duong', '08583758', '2016-10-20 21:55:30', '2016-10-20 21:55:35');
+INSERT INTO `user_addresses` VALUES ('6', '1', 'home', 'so 1 abc', 'Ha noi', 'tu liem', '0', 'le trong duong', '08583758', '2016-10-20 21:57:43', '2016-10-20 22:00:03');
+INSERT INTO `user_addresses` VALUES ('7', '1', 'home', 'so 1 abc', 'Ha noi', 'tu liem', '0', 'le trong duong', '08583758', '2016-10-20 22:00:03', '2016-10-20 22:00:03');
+INSERT INTO `user_addresses` VALUES ('8', '1', 'home', 'so 1 abc', 'Ha noi', 'tu liem', '1', 'le trong duong', '08583758', '2016-10-20 22:02:40', '2016-10-20 22:02:40');
 
 -- ----------------------------
 -- Table structure for user_balance
@@ -1175,12 +1331,16 @@ CREATE TABLE `user_balance` (
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `status` varchar(10) NOT NULL,
   `check_sum` varchar(100) NOT NULL,
+  `deposit` decimal(10,0) DEFAULT NULL,
+  `service_balance` decimal(10,0) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_balance
 -- ----------------------------
+INSERT INTO `user_balance` VALUES ('1', '1', '84970', '0', null, '2016-10-12 00:02:01', '2016-10-20 22:23:00', 'ACTIVE', '', '0', '15030');
+INSERT INTO `user_balance` VALUES ('2', '26', '0', '0', null, '2016-10-21 11:03:51', '2016-10-21 11:03:51', 'ACTIVE', '', null, null);
 
 -- ----------------------------
 -- Table structure for user_transactions
@@ -1197,16 +1357,21 @@ CREATE TABLE `user_transactions` (
   `total` decimal(10,0) DEFAULT NULL,
   `transaction_group_id` varchar(50) DEFAULT NULL,
   `detail` varchar(255) DEFAULT NULL,
-  `product_id` int(11) DEFAULT NULL,
+  `product_id` varchar(50) DEFAULT NULL,
   `product_name` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `check_sum` varchar(50) DEFAULT NULL,
+  `status` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_transactions
 -- ----------------------------
+INSERT INTO `user_transactions` VALUES ('2', '1', null, '152.1', '112.1', '1', '100000', '100000', null, null, '152.1', 'Nạp 100.000 đ vào tài khoản', '2016-10-12 21:48:08', null, 'PENDING');
+INSERT INTO `user_transactions` VALUES ('3', '1', null, '152.1', '112.1', '1', '100000', '100000', null, null, '152.1', 'Nạp 100.000 đ vào tài khoản', '2016-10-12 23:50:42', null, 'VALID');
+INSERT INTO `user_transactions` VALUES ('4', '1', '15', '331.1', '152.1', null, null, '15030', null, null, null, null, '2016-10-20 22:22:51', null, 'VALID');
+INSERT INTO `user_transactions` VALUES ('5', '1', '15', '131.1', '152.1', null, null, '0', null, null, null, null, '2016-10-20 22:22:54', null, 'VALID');
 
 -- ----------------------------
 -- Table structure for videos
